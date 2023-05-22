@@ -1,13 +1,12 @@
 package com.animal.animalhood.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -19,7 +18,7 @@ public class Member {
 
     private String name;
 
-    private String adress;
+    private String address;
 
     private Long patId;
 
@@ -30,4 +29,10 @@ public class Member {
     private int sittingPoint;
 
     private Date regDate;
+
+    @OneToMany(mappedBy = "member")
+    private List<SittingOrder> sittingOrders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Pat> pat = new ArrayList<>();
 }

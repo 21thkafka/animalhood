@@ -1,13 +1,12 @@
 package com.animal.animalhood.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter
@@ -16,6 +15,10 @@ public class Image {
     @Id @GeneratedValue
     @Column(name="petImageNo")
     private Long imgNo;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "pat_id")
+    private Pat pat;
 
     private String originalName;
 

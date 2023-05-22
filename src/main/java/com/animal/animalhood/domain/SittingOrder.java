@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.util.Date;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,7 +20,16 @@ public class SittingOrder {
     @Column(name="order_id")
     private Long id;
 
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name="member_id")
     private Member member;
+
+    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "sitting_id")
+    private SitterPat sitterPat;
+    @OneToOne(fetch = LAZY)
+    @JoinColumn(name = "pat_id")
+    private Pat pat;
 
     private String detail;
 
@@ -30,4 +41,9 @@ public class SittingOrder {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    public void setMember(Member member){
+        this.member = member;
+        member.getSittingOrders().add(this);
+    }
 }
