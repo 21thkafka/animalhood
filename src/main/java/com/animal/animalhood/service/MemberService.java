@@ -21,7 +21,7 @@ public class MemberService {
      */
     @Transactional
     public Long join(Member member) {
- //       validateDuplicateMember(member);
+        validateDuplicateMember(member);
         memberRepository.save(member);
 
         return member.getId();
@@ -29,7 +29,7 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     private void validateDuplicateMember(Member member) {
-        List<Member> findMember = memberRepository.findByLoginId(member.getLoginId());
+        List<Member> findMember = memberRepository.findByLoginId(member.getName());
         if(!findMember.isEmpty()){
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
