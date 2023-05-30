@@ -13,7 +13,7 @@ import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Pat {
 
     @Id
@@ -28,6 +28,8 @@ public class Pat {
     private int petAge;
 
     private String petName;
+
+    private String gubun;
 
     @OneToMany(mappedBy = "pat")
     private List<Image> image = new ArrayList<>();

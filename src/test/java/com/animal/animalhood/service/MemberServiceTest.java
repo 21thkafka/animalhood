@@ -1,7 +1,9 @@
 package com.animal.animalhood.service;
 
 import com.animal.animalhood.domain.Member;
+import com.animal.animalhood.domain.Pat;
 import com.animal.animalhood.repository.MemberRepository;
+import com.animal.animalhood.repository.PatRepository;
 import jakarta.persistence.EntityManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,9 +21,12 @@ import static org.junit.Assert.*;
 public class MemberServiceTest {
 
     @Autowired MemberService memberService;
-
     @Autowired
-    MemberRepository memberRepository;
+    PatService patService;
+    @Autowired
+    PatRepository patRepository;
+
+    @Autowired MemberRepository memberRepository;
 
     @Autowired
     EntityManager em;
@@ -37,8 +42,24 @@ public class MemberServiceTest {
         //when
         Long savedId = memberService.join(member);
 
-        System.out.println("savedId " + savedId);
         //then
         assertEquals(member, memberRepository.findOne(savedId));
+    }
+
+    @Test
+    @Transactional
+    public void addPatTest() throws Exception {
+        //given
+        Pat pat = new Pat();
+        pat.setPetName("보리");
+        pat.setPetAge(2);
+
+        //when
+        joinTest();
+        pat.setMember(memberRepository.findOne(0L));
+        Long savedId = patService.savePat(pat);
+
+        //then
+        assertEquals(pat, patRepository.findOne(savedId));
     }
 }
