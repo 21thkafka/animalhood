@@ -13,7 +13,7 @@ import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Pat {
 
     @Id
