@@ -6,17 +6,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SittingOrder {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="order_id")
     private Long id;
 
@@ -33,11 +34,11 @@ public class SittingOrder {
 
     private String detail;
 
-    private Date startDate;
+    private LocalDateTime startDate;
 
-    private Date endDate;
+    private LocalDateTime endDate;
 
-    private Date regDate;
+    private LocalDateTime regDate;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
@@ -46,4 +47,26 @@ public class SittingOrder {
         this.member = member;
         member.getSittingOrders().add(this);
     }
+
+    //==생성 메소드==//
+    public static SittingOrder createOrder(Member member){
+        SittingOrder order = new SittingOrder();
+        order.setMember(member);
+
+        order.setStatus(OrderStatus.PROGRESS);
+        order.setRegDate(LocalDateTime.now());
+        return order;
+    }
+
+    //==비즈니스 로직==//
+    /**
+     * 돌봄 요청 취소
+     */
+    public void cancel(){
+        if(status == OrderStatus.ACCEPT){
+            throw new IllegalStateException("이미 돌봄 요청 과정을 수락한 상태입니다");
+        }
+        this.setStatus(OrderStatus.CANCEL);
+    }
+
 }

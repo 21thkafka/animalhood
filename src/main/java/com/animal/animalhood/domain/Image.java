@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 import static jakarta.persistence.FetchType.LAZY;
 
@@ -28,5 +29,5 @@ public class Image {
 
     private String serverPath;
 
-    private Date regDate;
+    private LocalDateTime regDate;
 }

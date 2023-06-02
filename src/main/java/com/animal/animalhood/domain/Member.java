@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 @Entity
@@ -28,11 +29,14 @@ public class Member {
 
     private int sittingPoint;
 
-    private Date regDate;
+    private LocalDateTime regDate;
 
     @OneToMany(mappedBy = "member")
     private List<SittingOrder> sittingOrders = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Pat> pat = new ArrayList<>();
+
+    @OneToMany (mappedBy = "member")
+    private List<SitterPat> sitterPats = new ArrayList<>();
 }

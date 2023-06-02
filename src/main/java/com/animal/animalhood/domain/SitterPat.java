@@ -6,13 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SitterPat {
 
     @Id @GeneratedValue
@@ -22,6 +23,12 @@ public class SitterPat {
     @OneToOne(mappedBy = "sitterPat", fetch = LAZY)
     private SittingOrder sittingOrder;
 
-    private Date regDate;
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
+    private LocalDateTime regDate;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 }

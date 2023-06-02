@@ -2,5 +2,5 @@ package com.animal.animalhood.domain;
 
 public enum OrderStatus {
 
-    PROGRESS, ACCEPT, REJECT
+    PROGRESS, ACCEPT, REJECT, CANCEL
 }

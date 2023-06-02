@@ -26,6 +26,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+      format_sql: true
 
 logging:
   level:
