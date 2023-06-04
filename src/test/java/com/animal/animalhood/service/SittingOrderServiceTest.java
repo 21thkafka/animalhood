@@ -30,7 +30,7 @@ public class SittingOrderServiceTest {
         Member member = createMember("testId1", "testName1");
 
         //when
-        Long orderId = sittingOrderService.order(member.getId());
+        Long orderId = sittingOrderService.order(member.getId(), "20230603", "20230606");
 
         SittingOrder getOrder = sittingOrderRepository.findOne(orderId);
         //then
@@ -44,7 +44,7 @@ public class SittingOrderServiceTest {
     public void sittingCancelTest() throws Exception {
         //given
         Member member = createMember("testId1", "testName1");
-        Long orderId = sittingOrderService.order(member.getId());
+        Long orderId = sittingOrderService.order(member.getId(), "20230603", "20230606");
 
         //when
         sittingOrderService.canselOrder(orderId);
@@ -58,7 +58,7 @@ public class SittingOrderServiceTest {
     public void sittingPatTest() throws Exception {
         //given
         Member member = createMember("testId1", "testName1");
-        Long orderId = sittingOrderService.order(member.getId());
+        Long orderId = sittingOrderService.order(member.getId(), "20230603", "20230606");
         SittingOrder order = sittingOrderRepository.findOne(orderId);
         SitterPat sitter = new SitterPat();
         sitter.setSittingOrder(order);
@@ -79,7 +79,7 @@ public class SittingOrderServiceTest {
     public void answerTest() throws Exception {
         //given
         Member member = createMember("testId1", "testName1");
-        Long orderId = sittingOrderService.order(member.getId());
+        Long orderId = sittingOrderService.order(member.getId(), "20230603", "20230606");
         SittingOrder order = sittingOrderRepository.findOne(orderId);
         SitterPat sitter = new SitterPat();
         sitter.setSittingOrder(order);

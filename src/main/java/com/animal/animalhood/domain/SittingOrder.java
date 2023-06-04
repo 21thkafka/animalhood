@@ -13,7 +13,7 @@ import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SittingOrder {
 
     @Id
@@ -49,7 +49,7 @@ public class SittingOrder {
     }
 
     //==생성 메소드==//
-    public static SittingOrder createOrder(Member member){
+    public static SittingOrder createOrder(Member member, String strDate, String endDate){
         SittingOrder order = new SittingOrder();
         order.setMember(member);
 

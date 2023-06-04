@@ -11,22 +11,29 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class SittingOrderService {
 
     private final MemberRepository memberRepository;
-    private final PatRepository patRepository;
+//    private final PatRepository patRepository;
     private final SittingOrderRepository sittingOrderRepository;
+
+    public List<SittingOrder> findList() {
+        return sittingOrderRepository.findAll();
+    }
 
     /**
      * 돌봄 요청
      */
     @Transactional
-    public Long order(Long memberId){
+    public Long order(Long memberId, String strDate, String endDate){
         Member member = memberRepository.findOne(memberId);
-        SittingOrder order = SittingOrder.createOrder(member);
+        SittingOrder order = SittingOrder.createOrder(member, strDate, endDate);
+
         sittingOrderRepository.save(order);
         return order.getId();
     }

@@ -1,5 +1,6 @@
 package com.animal.animalhood.repository;
 
+import com.animal.animalhood.domain.Member;
 import com.animal.animalhood.domain.SitterPat;
 import com.animal.animalhood.domain.SittingOrder;
 import jakarta.persistence.EntityManager;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.swing.text.html.parser.Entity;
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -20,7 +22,10 @@ public class SittingOrderRepository {
         return em.find(SittingOrder.class, id);
     }
 
-    private SittingOrder findAll(Long id) { return em.find(SittingOrder.class, id); };
+    public List<SittingOrder> findAll() {
+        return em.createQuery("select s from SittingOrder s", SittingOrder.class)
+                .getResultList();
+    }
 
     public void requestSitting(SitterPat sitter){ em.persist(sitter); }
 
