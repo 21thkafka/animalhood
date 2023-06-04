@@ -6,7 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.nio.file.SimpleFileVisitor;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 import static jakarta.persistence.FetchType.LAZY;
@@ -53,7 +56,13 @@ public class SittingOrder {
         SittingOrder order = new SittingOrder();
         order.setMember(member);
 
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        LocalDateTime strDateTime = LocalDateTime.parse(strDate, format);
+        LocalDateTime endDateTime = LocalDateTime.parse(endDate, format);
+
         order.setStatus(OrderStatus.PROGRESS);
+        order.setStartDate(strDateTime);
+        order.setEndDate(endDateTime);
         order.setRegDate(LocalDateTime.now());
         return order;
     }

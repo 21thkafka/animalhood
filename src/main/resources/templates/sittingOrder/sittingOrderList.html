@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div>
+        <a href = "/sittingOrder">등록하기</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+<!--                <th>회원id</th>-->
+<!--                <th>돌봄펫 이름</th>-->
+<!--                <th>돌봄펫 나이</th>-->
+                <th>시작날짜</th>
+                <th>종료날짜</th>
+                <th>등록 날짜</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${orders}">
+                <td th:text="${item.id}"></td>
+<!--                <td th:text="${item.member.id}"></td>-->
+<!--                <td th:text="${item.pat[0].petName}"></td>-->
+<!--                <td th:text="${item.pat[0].petAge}"></td>-->
+                <td th:text="${item.startDate}"></td>
+                <td th:text="${item.endDate}"></td>
+                <td th:text="${item.regDate}"></td>
+                <td>
+<!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
+<!--                       th:href="'javascript:cancel('+${item.id}+')'"-->
+<!--                       class="btn btn-danger">CANCEL</a>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

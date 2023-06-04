@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -25,5 +27,10 @@ public class PatService {
         findPat.setPetName(name);
         findPat.setPetAge(age);
         return findPat;
+    }
+
+    public List<Pat> findPat(Long id){
+        List<Pat> pats = patRepository.findPat(id);
+        return pats;
     }
 }

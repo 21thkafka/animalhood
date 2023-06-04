@@ -22,6 +22,12 @@ public class PatRepository {
         return em.find(Pat.class, id);
     }
 
+    public List<Pat> findPat(Long patId){
+        return em.createQuery("select p from Pat p where patId = :patId", Pat.class)
+                .setParameter("patId", patId)
+                .getResultList();
+    }
+
     public List<Pat> findAll(){
         return em.createQuery("select p from Pat p", Pat.class)
                 .getResultList();
