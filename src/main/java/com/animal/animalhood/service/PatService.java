@@ -33,4 +33,9 @@ public class PatService {
         List<Pat> pats = patRepository.findPat(id);
         return pats;
     }
+
+    public List<Pat> findPatMember(Long memberId) {
+        List<Pat> pats = patRepository.findPatMember(memberId);
+        return pats;
+    }
 }

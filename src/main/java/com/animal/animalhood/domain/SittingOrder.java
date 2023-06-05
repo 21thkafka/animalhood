@@ -7,11 +7,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.nio.file.SimpleFileVisitor;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 
+import static jakarta.persistence.FetchType.EAGER;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -24,7 +28,7 @@ public class SittingOrder {
     @Column(name="order_id")
     private Long id;
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = EAGER)
     @JoinColumn(name="member_id")
     private Member member;
 
@@ -56,15 +60,26 @@ public class SittingOrder {
         SittingOrder order = new SittingOrder();
         order.setMember(member);
 
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-        LocalDateTime strDateTime = LocalDateTime.parse(strDate, format);
-        LocalDateTime endDateTime = LocalDateTime.parse(endDate, format);
+        LocalDateTime strDateTime = parseDate(strDate);
+        LocalDateTime endDateTime = parseDate(endDate);
 
         order.setStatus(OrderStatus.PROGRESS);
         order.setStartDate(strDateTime);
         order.setEndDate(endDateTime);
         order.setRegDate(LocalDateTime.now());
         return order;
+    }
+
+    //String->LocalDateTime 변환
+    public static LocalDateTime parseDate(String date){
+
+        String dateTimeString = date.replace("T", " ");
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
+
+
+        return dateTime;
     }
 
     //==비즈니스 로직==//

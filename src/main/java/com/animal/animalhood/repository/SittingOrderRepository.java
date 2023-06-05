@@ -1,13 +1,11 @@
 package com.animal.animalhood.repository;
 
-import com.animal.animalhood.domain.Member;
 import com.animal.animalhood.domain.SitterPat;
 import com.animal.animalhood.domain.SittingOrder;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @Repository
@@ -23,7 +21,7 @@ public class SittingOrderRepository {
     }
 
     public List<SittingOrder> findAll() {
-        return em.createQuery("select s from SittingOrder s", SittingOrder.class)
+        return em.createQuery("select s from SittingOrder s inner join s.member", SittingOrder.class)
                 .getResultList();
     }
 

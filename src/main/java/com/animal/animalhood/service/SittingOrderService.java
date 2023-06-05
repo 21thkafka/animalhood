@@ -1,9 +1,6 @@
 package com.animal.animalhood.service;
 
-import com.animal.animalhood.domain.Member;
-import com.animal.animalhood.domain.OrderStatus;
-import com.animal.animalhood.domain.SitterPat;
-import com.animal.animalhood.domain.SittingOrder;
+import com.animal.animalhood.domain.*;
 import com.animal.animalhood.repository.MemberRepository;
 import com.animal.animalhood.repository.PatRepository;
 import com.animal.animalhood.repository.SittingOrderRepository;
@@ -19,7 +16,7 @@ import java.util.List;
 public class SittingOrderService {
 
     private final MemberRepository memberRepository;
-//    private final PatRepository patRepository;
+    private final PatRepository patRepository;
     private final SittingOrderRepository sittingOrderRepository;
 
     public List<SittingOrder> findList() {
@@ -30,12 +27,21 @@ public class SittingOrderService {
      * 돌봄 요청
      */
     @Transactional
-    public Long order(Long memberId, String strDate, String endDate){
+    public Long order(Long memberId, String strDate, String endDate, String detail){
         Member member = memberRepository.findOne(memberId);
         SittingOrder order = SittingOrder.createOrder(member, strDate, endDate);
+        order.setDetail(detail);
 
         sittingOrderRepository.save(order);
         return order.getId();
+    }
+
+    /**
+     * 상세조회
+     */
+    public SittingOrder orderDetail(Long orderId){
+        SittingOrder order = sittingOrderRepository.findOne(orderId);
+        return order;
     }
 
     /**

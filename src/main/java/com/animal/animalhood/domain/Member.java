@@ -34,6 +34,16 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<SittingOrder> sittingOrders = new ArrayList<>();
 
+    public void addSittingOrder(SittingOrder sittingOrder) {
+        sittingOrders.add(sittingOrder);
+        sittingOrder.setMember(this);
+    }
+
+    public void removeSittingOrder(SittingOrder sittingOrder) {
+        sittingOrders.remove(sittingOrder);
+        sittingOrder.setMember(null);
+    }
+
     @OneToMany(mappedBy = "member")
     private List<Pat> pat = new ArrayList<>();
 

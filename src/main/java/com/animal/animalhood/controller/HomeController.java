@@ -1,8 +1,10 @@
 package com.animal.animalhood.controller;
 
 import com.animal.animalhood.domain.Member;
+import com.animal.animalhood.domain.Pat;
 import com.animal.animalhood.domain.SittingOrder;
 import com.animal.animalhood.service.MemberService;
+import com.animal.animalhood.service.PatService;
 import com.animal.animalhood.service.SittingOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,7 @@ import java.util.List;
 public class HomeController {
 
     private final MemberService memberService;
-
+    private final PatService patService;
     private final SittingOrderService sittingOrderService;
 
     @GetMapping("/")
@@ -29,9 +31,14 @@ public class HomeController {
         testMember.setSittingPoint(0);
         memberService.join(testMember);
 
-        List<SittingOrder> orders = sittingOrderService.findList();
-        model.addAttribute("orders", orders);
+        //test id 유저의 펫 입력
+        Pat testPat = new Pat();
+        testPat.setMember(testMember);
+        testPat.setPetName("구름이");
+        testPat.setPetAge(12);
+        testPat.setGubun("강아지");
+        Long savePat = patService.savePat(testPat);
 
-        return  "sittingOrder/sittingOrderList";
+        return  "home";
     }
 }

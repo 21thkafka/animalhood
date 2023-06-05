@@ -2,6 +2,7 @@ package com.animal.animalhood.service;
 
 import com.animal.animalhood.domain.Member;
 import com.animal.animalhood.repository.MemberRepository;
+import com.animal.animalhood.repository.PatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    private final PatRepository patRepository;
     /**
      * 회원 가입
      */
@@ -28,15 +30,22 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     private void validateDuplicateMember(Member member) {
-        List<Member> findMember = memberRepository.findByLoginId(member.getName());
+        List<Member> findMember = memberRepository.findByLoginId(member.getLoginId());
         if(!findMember.isEmpty()){
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
-    
+
+    //회원정보 수정
+    @Transactional
+    public void updateMember(Member member){
+
+    }
+
     //회원 전체 조회
     public List<Member> findMembers(){ return memberRepository.findAll(); }
 
+    @Transactional
     public Member findOne(Long memberId) { return memberRepository.findOne(memberId);}
 
 }
