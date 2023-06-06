@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header" />
 <body>
+
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <form role="form" action="/sittingOrder" method="post">
@@ -23,10 +24,12 @@
         </div>
         <div class="form-group">
             <label for="detail">상세 내용</label>
-            <textarea id="detail" name="detail"></textarea>
+            <textarea id="detail" name="detail" class="form-control"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" id="apply-btn">등록하기</button>
+
     </form>
+
     <br/>
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->

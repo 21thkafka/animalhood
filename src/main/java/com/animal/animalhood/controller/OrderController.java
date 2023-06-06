@@ -54,7 +54,7 @@ public class OrderController {
         return "redirect:/sittingOrders";
     }
 
-    //수정하기
+    //상세조회
     @GetMapping("/sittingOrder/detail/{id}")
     public String updateSittingOrder (@PathVariable Long id, Model model){
         SittingOrder order = sittingOrderService.orderDetail(id);
@@ -62,4 +62,5 @@ public class OrderController {
 
         return "sittingOrder/sittingOrderDetail";
     }
+
 }

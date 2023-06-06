@@ -4,31 +4,70 @@
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-<!--    <form role="form" action="/sittingOrder" method="post">-->
-        <div class="form-group">
-            <label for="memberId">회원id</label>
-            <input type="text" name="memberId" class="form-control" id="memberId" th:value="${order.member.loginId}" readonly>
-        </div>
-        <div class="form-group">
-            <label for="patName">반려동물명</label>
-            <input type="text" name="patName" class="form-control" id="patName" readonly>
-        </div>
-        <div class="form-group">
-            <label for="strDate">돌봄요청 시작일</label>
-            <input type="datetime-local" name="strDate" class="form-control" id="strDate" th:value="${order.startDate}" readonly>
-        </div>
-        <div class="form-group">
-            <label for="endDate">돌봄요청 종료일</label>
-            <input type="datetime-local" name="endDate" class="form-control" id="endDate" th:value="${order.endDate}" readonly>
-        </div>
-        <div class="form-group">
-            <label for="detail">상세 내용</label>
-            <textarea id="detail" th:value="${order.detail}" th:text="${order.detail}"></textarea>
-        </div>
+    <div id="detailTable">
+    <table class="table table-striped">
+
+        <tbody>
+            <tr>
+                <th>회원id</th>
+                <td th:text="${order.member.loginId}"></td>
+            </tr>
+            <tr>
+                <th>반려동물명</th>
+                <!--                <td th:text="${order.pat.patName}"></td>--><td>testPat</td>
+            </tr>
+            <tr>
+                <th>돌봄요청 시작일</th>
+                <td th:text="${order.startDate}"></td>
+            </tr>
+            <tr>
+                <th>돌봄요청 종료일</th>
+                <td th:text="${order.endDate}"></td>
+            </tr>
+            <tr>
+                <th>상세 내용</th>
+                <td th:text="${order.detail}"></td>
+            </tr>
+        </tbody>
+    </table>
         <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/sittingOrder/detail?id={order.id}(id=${order.id})}'|">돌봄 신청하기</button>
-<!--    </form>-->
+        <button type="button" class="btn btn-primary" id="modify-btn">수정하기</button>
+    </div>
+
+    <div id="updateForm" style="display:none">
+        <form role="form" action="/sittingOrder" method="put">
+            <table class="table table-striped">
+
+                <tbody>
+                <tr>
+                    <th><label for="memberId">회원id</label></th>
+                    <td><input class="form-control" id="memberId" th:value="${order.member.loginId}"></td>
+                </tr>
+                <tr>
+                    <th>반려동물명</th>
+                    <!--                <td th:text="${order.pat.patName}"></td>--><td>testPat</td>
+                </tr>
+                <tr>
+                    <th>돌봄요청 시작일</th>
+                    <td><input type="datetime-local" name="strDate" class="form-control" id="strDate" th:value="${order.startDate}"></td>
+                </tr>
+                <tr>
+                    <th>돌봄요청 종료일</th>
+                    <td><input type="datetime-local" name="endDate" class="form-control" id="endDate" th:value="${order.endDate}"></td>
+                </tr>
+                <tr>
+                    <th>상세 내용</th>
+                    <td><textarea id="detail" name="detail" class="form-control" th:text="${order.detail}"></textarea></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-primary" id="apply-btn">수정완료</button>
+        </form>
+    </div>
     <br/>
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
 </body>
+<script src="/js/sitting/sittingOrder.js"></script>
 </html>
