@@ -20,7 +20,7 @@ import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SittingOrder {
 
     @Id
@@ -28,7 +28,7 @@ public class SittingOrder {
     @Column(name="order_id")
     private Long id;
 
-    @ManyToOne(fetch = EAGER)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name="member_id")
     private Member member;
 

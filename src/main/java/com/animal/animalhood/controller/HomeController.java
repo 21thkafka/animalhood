@@ -39,6 +39,9 @@ public class HomeController {
         testPat.setGubun("강아지");
         Long savePat = patService.savePat(testPat);
 
+        //test order 입력
+        sittingOrderService.order(1L, "2023-06-10T19:27", "2023-06-12T19:27", "test text");
+
         return  "home";
     }
 }

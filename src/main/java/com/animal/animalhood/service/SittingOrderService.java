@@ -1,6 +1,7 @@
 package com.animal.animalhood.service;
 
 import com.animal.animalhood.domain.*;
+import com.animal.animalhood.dto.updateSittingOrder;
 import com.animal.animalhood.repository.MemberRepository;
 import com.animal.animalhood.repository.PatRepository;
 import com.animal.animalhood.repository.SittingOrderRepository;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -41,6 +43,21 @@ public class SittingOrderService {
      */
     public SittingOrder orderDetail(Long orderId){
         SittingOrder order = sittingOrderRepository.findOne(orderId);
+        return order;
+    }
+
+    /**
+     * 수정
+     */
+    @Transactional
+    public SittingOrder orderUpdate(Long orderId, updateSittingOrder request){
+        SittingOrder order = sittingOrderRepository.findOne(orderId);
+     //   LocalDateTime startDateTime = SittingOrder.parseDate(strDate);
+     //   LocalDateTime endDateTime = SittingOrder.parseDate(endDate);
+
+        order.setStartDate(request.getStartDate());
+        order.setEndDate(request.getEndDate());
+        order.setDetail(request.getDetail());
         return order;
     }
 

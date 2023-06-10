@@ -21,7 +21,8 @@ spring:
     username: root
     password: hyun0712*
   jpa:
-    open-in-view: false
+#    open-in-view: false
+    open-in-view: true
     generate-ddl: true
     show-sql: true
     hibernate:

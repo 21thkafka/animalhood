@@ -3,17 +3,19 @@ package com.animal.animalhood.controller;
 
 import com.animal.animalhood.domain.SittingOrder;
 
+import com.animal.animalhood.dto.updateSittingOrder;
 import com.animal.animalhood.service.MemberService;
 
 import com.animal.animalhood.service.SittingOrderService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -47,20 +49,41 @@ public class OrderController {
                                @RequestParam("strDate") String strDate,
                                @RequestParam("endDate") String endDate){
 
-     //   strDate = strDate + " 00:00:00.000";
-     //   endDate= endDate + " 00:00:00.000";
-
         sittingOrderService.order(memberId, strDate, endDate, detail);
         return "redirect:/sittingOrders";
     }
 
     //상세조회
     @GetMapping("/sittingOrder/detail/{id}")
-    public String updateSittingOrder (@PathVariable Long id, Model model){
+    public String detailSittingOrder (@PathVariable Long id, Model model){
         SittingOrder order = sittingOrderService.orderDetail(id);
         model.addAttribute("order", order);
 
         return "sittingOrder/sittingOrderDetail";
+    }
+
+    @PutMapping("/sittingOrder/detail/{id}")
+    public ResponseEntity<UpdateOrderResponse> updateSittingOrder (@PathVariable Long id,
+                                                            @RequestBody updateSittingOrder request,
+                                                            Model model){
+
+
+        SittingOrder updatedOrder = sittingOrderService.orderUpdate(id, request);
+
+    //    model.addAttribute("order", updatedOrder);
+        UpdateOrderResponse result = new UpdateOrderResponse(updatedOrder.getId(), updatedOrder.getStartDate(), updatedOrder.getEndDate(),updatedOrder.getDetail());
+
+        return ResponseEntity.ok()
+                .body(result);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class UpdateOrderResponse {
+        private Long id;
+        private LocalDateTime startDate;
+        private LocalDateTime endDate;
+        private String Detail;
     }
 
 }

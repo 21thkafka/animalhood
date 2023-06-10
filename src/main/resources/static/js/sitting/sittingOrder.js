@@ -12,24 +12,27 @@ if (modifyButton){
     });
 }
 
-/*if (modifyButton) {
-    modifyButton.addEventListener('click', event => {
-        let params = new URLSearchParams(location.search);
-        let id = params.get('id');
+const updateButton = document.getElementById('update-btn');
 
-        fetch(`/api/articles/${id}`, {
+if (updateButton) {
+    updateButton.addEventListener('click', event => {
+        let url = window.location.href;
+        let id = url.charAt(url.length - 1);
+
+        fetch(`/sittingOrder/detail/${id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                title: document.getElementById('title').value,
-                content: document.getElementById('content').value
+                startDate: document.getElementById('startDate').value,
+                endDate: document.getElementById('endDate').value,
+                detail: document.getElementById('detail').value
             })
         })
             .then(() => {
                 alert('수정이 완료되었습니다.');
-                location.replace(`/articles/${id}`);
+                location.replace(`/sittingOrder/detail/${id}`);
             });
     });
-}*/
+}
