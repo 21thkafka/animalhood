@@ -52,8 +52,6 @@ public class SittingOrderService {
     @Transactional
     public SittingOrder orderUpdate(Long orderId, updateSittingOrder request){
         SittingOrder order = sittingOrderRepository.findOne(orderId);
-     //   LocalDateTime startDateTime = SittingOrder.parseDate(strDate);
-     //   LocalDateTime endDateTime = SittingOrder.parseDate(endDate);
 
         order.setStartDate(request.getStartDate());
         order.setEndDate(request.getEndDate());
@@ -71,8 +69,18 @@ public class SittingOrderService {
     }
 
     /**
+     * 돌봄 요청 삭제
+     */
+    @Transactional
+    public void deleteOrder(Long orderId){
+        SittingOrder order = sittingOrderRepository.findOne(orderId);
+        sittingOrderRepository.delete(order);
+    }
+
+    /**
      * 요청 신청
      */
+    @Transactional
     public Long requestSitting(SitterPat sitter){
         sitter.setStatus(OrderStatus.PROGRESS);
         sittingOrderRepository.requestSitting(sitter);
@@ -82,6 +90,7 @@ public class SittingOrderService {
     /**
      * 신청 응답
      */
+    @Transactional
     public void responseSitting(SitterPat sitter, OrderStatus status){
         SitterPat getSitter = sittingOrderRepository.findSitter(sitter.getId());
         getSitter.setStatus(status);

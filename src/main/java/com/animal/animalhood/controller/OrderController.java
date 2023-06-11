@@ -66,8 +66,6 @@ public class OrderController {
     public ResponseEntity<UpdateOrderResponse> updateSittingOrder (@PathVariable Long id,
                                                             @RequestBody updateSittingOrder request,
                                                             Model model){
-
-
         SittingOrder updatedOrder = sittingOrderService.orderUpdate(id, request);
 
     //    model.addAttribute("order", updatedOrder);
@@ -75,6 +73,14 @@ public class OrderController {
 
         return ResponseEntity.ok()
                 .body(result);
+    }
+
+    @DeleteMapping("/sittingOrder/detail/{id}")
+    public ResponseEntity<Void> deleteSittingOrder(@PathVariable Long id){
+        sittingOrderService.deleteOrder(id);
+
+        return ResponseEntity.ok()
+                .build();
     }
 
     @Data

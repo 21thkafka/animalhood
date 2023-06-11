@@ -5,6 +5,7 @@
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div id="detailTable">
+        <input type="hidden" id="orderId" th:value="${order.id}" />
     <table class="table table-striped">
 
         <tbody>
@@ -32,6 +33,7 @@
     </table>
         <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/sittingOrder/detail?id={order.id}(id=${order.id})}'|">돌봄 신청하기</button>
         <button type="button" class="btn btn-primary" id="modify-btn">수정하기</button>
+        <button type="button" class="btn btn-primary" id="delete-btn">삭제하기</button>
     </div>
 
     <div id="updateForm" style="display:none">

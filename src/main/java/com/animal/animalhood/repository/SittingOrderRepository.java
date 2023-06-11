@@ -4,6 +4,7 @@ import com.animal.animalhood.domain.SitterPat;
 import com.animal.animalhood.domain.SittingOrder;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,5 +30,9 @@ public class SittingOrderRepository {
 
     public SitterPat findSitter(Long id){
         return em.find(SitterPat.class, id);
+    }
+
+    public void delete(SittingOrder order) {
+        em.remove(order);
     }
 }
