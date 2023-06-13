@@ -2,6 +2,7 @@ package com.animal.animalhood.service;
 
 import com.animal.animalhood.domain.Member;
 import com.animal.animalhood.domain.Pat;
+import com.animal.animalhood.dto.addMemberRequest;
 import com.animal.animalhood.repository.MemberRepository;
 import com.animal.animalhood.repository.PatRepository;
 import jakarta.persistence.EntityManager;
@@ -35,6 +36,7 @@ public class MemberServiceTest {
     @Transactional
     public void joinTest() throws Exception {
         //given
+   //    addMemberRequest req = new addMemberRequest();
         Member member = new Member();
         member.setSittingPoint(0);
         member.setLoginId("loginTest");

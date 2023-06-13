@@ -35,7 +35,7 @@ public class SittingOrder {
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sitting_id")
     private SitterPat sitterPat;
-    @OneToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "pat_id")
     private Pat pat;
 

@@ -1,6 +1,7 @@
 package com.animal.animalhood.repository;
 
 import com.animal.animalhood.domain.Member;
+import com.animal.animalhood.dto.addMemberRequest;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,6 @@ public class MemberRepository {
                 .setParameter("loginId", loginId)
                 .getResultList();
     }
+
+    public Member findByOneLoginId(String LoginId) { return em.find(Member.class, LoginId); }
 }
