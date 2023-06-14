@@ -39,7 +39,7 @@ public class MemberServiceTest {
    //    addMemberRequest req = new addMemberRequest();
         Member member = new Member();
         member.setSittingPoint(0);
-        member.setLoginId("loginTest");
+        member.setEmail("loginTest");
 
         //when
         Long savedId = memberService.join(member);

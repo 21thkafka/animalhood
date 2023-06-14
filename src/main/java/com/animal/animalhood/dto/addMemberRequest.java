@@ -11,10 +11,9 @@ import java.time.LocalDateTime;
 public class addMemberRequest {
 
     private Long id;
-    private String loginId;
     private String name;
     private String password;
-    private String eMail;
+    private String email;
     private String mobile;
     private String address;
 

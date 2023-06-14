@@ -96,9 +96,9 @@ public class SittingOrderServiceTest {
         assertEquals(OrderStatus.REJECT, getSitter.getStatus());
     }
 
-    private Member createMember(String id, String name) {
+    private Member createMember(String email, String name) {
         Member member = new Member();
-        member.setLoginId(id);
+        member.setEmail(email);
         member.setName(name);
         member.setSittingPoint(0);
         em.persist(member);

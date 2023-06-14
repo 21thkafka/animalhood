@@ -2,6 +2,7 @@ package com.animal.animalhood.service;
 
 import com.animal.animalhood.domain.Member;
 import com.animal.animalhood.dto.addMemberRequest;
+import com.animal.animalhood.repository.LoginRepository;
 import com.animal.animalhood.repository.MemberRepository;
 import com.animal.animalhood.repository.PatRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,28 +23,20 @@ import java.util.LongSummaryStatistics;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-
     private final PatRepository patRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     /**
      * 회원 가입
      */
     @Transactional
     public Long join(Member member) {
-        loadUserByUsername(member);
+        loadUserByUsername(member.getEmail());
         String pw = member.getPassword();
         member.setPassword(bCryptPasswordEncoder.encode(pw));
         member.setRegDate(LocalDateTime.now());
         memberRepository.save(member);
         return member.getId();
-    }
-
-    @Transactional(readOnly = true)
-    private void loadUserByUsername(Member member) {
-        List<Member> findMember = memberRepository.findByLoginId(member.getLoginId());
-        if(!findMember.isEmpty()){
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-        }
     }
 
     //회원정보 수정
@@ -58,4 +51,10 @@ public class MemberService {
     @Transactional
     public Member findOne(Long memberId) { return memberRepository.findOne(memberId);}
 
+    public void loadUserByUsername(String email){
+        List<Member> checkEmail = memberRepository.findByEmail(email);
+        if(!checkEmail.isEmpty()){
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
+        }
+    }
 }

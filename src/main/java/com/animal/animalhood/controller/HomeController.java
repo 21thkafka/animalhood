@@ -25,9 +25,10 @@ public class HomeController {
     public String home(Model model){
 
         //test id 유저 디폴트로 입력
-    /*    Member testMember = new Member();
+   /*     Member testMember = new Member();
         testMember.setLoginId("testId");
         testMember.setName("testName");
+        testMember.setPassword("test123");
         testMember.setSittingPoint(0);
         memberService.join(testMember);*/
 

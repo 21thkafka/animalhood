@@ -25,11 +25,10 @@ public class MemberRepository {
                 .getResultList();
     }
 
-    public List<Member> findByLoginId(String loginId) {
-        return em.createQuery("select m from Member m where m.loginId = :loginId", Member.class)
-                .setParameter("loginId", loginId)
+    public List<Member> findByEmail(String email) {
+        return em.createQuery("select m from Member m where m.email = :email", Member.class)
+                .setParameter("email", email)
                 .getResultList();
     }
 
-    public Member findByOneLoginId(String LoginId) { return em.find(Member.class, LoginId); }
 }

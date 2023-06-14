@@ -22,17 +22,15 @@ public class Member implements UserDetails {
     @Column(name="member_id")
     private Long id;
 
-    private String password;
+    private String email;
 
-    private String loginId;
+    private String password;
 
     private String name;
 
     private String address;
 
     private String mobile;
-
-    private String eMail;
 
     private int sittingPoint;
 
