@@ -3,6 +3,7 @@ package com.animal.animalhood.controller;
 import com.animal.animalhood.domain.Member;
 import com.animal.animalhood.domain.Pat;
 import com.animal.animalhood.domain.SittingOrder;
+import com.animal.animalhood.service.MemberDetailService;
 import com.animal.animalhood.service.MemberService;
 import com.animal.animalhood.service.PatService;
 import com.animal.animalhood.service.SittingOrderService;
@@ -23,6 +24,7 @@ import java.util.List;
 public class HomeController {
 
     private final MemberService memberService;
+    private final MemberDetailService memberDetailService;
     private final PatService patService;
     private final SittingOrderService sittingOrderService;
 
@@ -42,8 +44,9 @@ public class HomeController {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;
-        String name = userDetails.getUsername();
-        model.addAttribute("name", name);
+        String email = userDetails.getUsername();
+        UserDetails member = memberDetailService.loadUserByUsername(email);
+        model.addAttribute("member", member);
 
         return  "home";
     }

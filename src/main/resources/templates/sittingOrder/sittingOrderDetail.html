@@ -10,8 +10,8 @@
 
         <tbody>
             <tr>
-                <th>회원id</th>
-                <td th:text="${order.member.loginId}"></td>
+                <th>회원 email</th>
+                <td th:text="${order.member.email}"></td>
             </tr>
             <tr>
                 <th>반려동물명</th>
@@ -42,8 +42,8 @@
 
                 <tbody>
                 <tr>
-                    <th><label for="memberId">회원id</label></th>
-                    <td><input class="form-control" id="memberId" th:value="${order.member.loginId}"></td>
+                    <th><label for="email">회원 email</label></th>
+                    <td><input class="form-control" id="email" th:value="${order.member.email}" readonly></td>
                 </tr>
                 <tr>
                     <th>반려동물명</th>

@@ -4,6 +4,7 @@ package com.animal.animalhood.controller;
 import com.animal.animalhood.domain.SittingOrder;
 
 import com.animal.animalhood.dto.updateSittingOrder;
+import com.animal.animalhood.service.MemberDetailService;
 import com.animal.animalhood.service.MemberService;
 
 import com.animal.animalhood.service.SittingOrderService;
@@ -11,6 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +26,7 @@ import java.util.List;
 public class OrderController {
 
     private final SittingOrderService sittingOrderService;
+    private final MemberDetailService memberDetailService;
     private final MemberService memberService;
 //    private final PatService patService;
 
@@ -38,7 +42,11 @@ public class OrderController {
     public String applyForm ( Model model){
 
 //        List<Pat> pats = patService.findPat();
-//        Member member = memberService.findOne();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+        String email = userDetails.getUsername();
+        UserDetails member = memberDetailService.loadUserByUsername(email);
+        model.addAttribute("member", member);
 
         return "sittingOrder/sittingOrderForm";
     }

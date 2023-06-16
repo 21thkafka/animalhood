@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>마이 페이지</title>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>환영합니다</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div id="detailTable">
+        <input type="hidden" id="memberId" th:value="${member.id}" />
+        <table class="table table-striped">
 
+            <tbody>
+            <tr>
+                <th>회원 이름</th>
+                <td th:text="${member.name}"></td>
+            </tr>
+            <tr>
+                <th>회원 email</th>
+                <td th:text="${member.email}"></td>
+            </tr>
+
+            <tr>
+                <th>전화번호</th>
+                <td th:text="${member.mobile}"></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td th:text="${member.address}"></td>
+            </tr>
+            <tr>
+                <th>반려동물명</th>
+                <!--                <td th:text="${order.pat.patName}"></td>--><td>testPat</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -51,9 +52,12 @@ public class MemberController {
     }
 
     @GetMapping("/myPage")
-    public String myPage(){
+    public String myPage(Model model){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;
+        String email = userDetails.getUsername();
+        UserDetails member = memberDetailService.loadUserByUsername(email);
+        model.addAttribute("member", member);
 
         return "myPage";
     }

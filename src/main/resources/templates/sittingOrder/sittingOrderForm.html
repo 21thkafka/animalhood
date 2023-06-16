@@ -6,9 +6,10 @@
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <form role="form" action="/sittingOrder" method="post">
+        <input type="hidden" id="memberId" name="memberId" th:value="${member.id}">
         <div class="form-group">
-            <label for="memberId">회원id</label>
-            <input type="text" name="memberId" class="form-control" id="memberId">
+            <label for="email">회원 email</label>
+            <input type="text" name="email" class="form-control" id="email" th:value="${member.email}" readonly>
         </div>
         <div class="form-group">
             <label for="patName">반려동물명</label>
