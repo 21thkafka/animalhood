@@ -2,11 +2,13 @@ package com.animal.animalhood.config;
 
 import com.animal.animalhood.service.MemberDetailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,8 +22,7 @@ public class WebSecurityConfig {
     @Bean
     public WebSecurityCustomizer configure(){
         return (web) -> web.ignoring()
-    //            .requestMatchers(toH2Console())
-                .requestMatchers("/static/**");
+                .requestMatchers("/css/**");
     }
 
     @Bean
@@ -33,7 +34,7 @@ public class WebSecurityConfig {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("/login/action")
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/home")
                 .and()
                 .logout()

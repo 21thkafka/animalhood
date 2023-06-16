@@ -5,7 +5,12 @@ import com.animal.animalhood.dto.addMemberRequest;
 import com.animal.animalhood.dto.loginRequest;
 import com.animal.animalhood.service.MemberDetailService;
 import com.animal.animalhood.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,17 +28,11 @@ public class MemberController {
         return "login";
     }
 
- /*   @PostMapping("/login")
-    public String loginPost(loginRequest req){
-        String id = req.getLoginId();
-        String pw = req.getPassword();
-        Member member = memberDetailService.loadUserByUsername(id);
-        String check = memberService.loginCheck(pw, member.getPassword());
-        if(member == null || check.equals("N")){
-            return "login";
-        }
-        return "redirect:/home";
-    }*/
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+        return "redirect:/login";
+    }
 
     @GetMapping("/signup")
     public String signup(){
@@ -49,5 +48,13 @@ public class MemberController {
         member.setMobile(req.getMobile());
         memberService.join(member);
         return "redirect:/login";
+    }
+
+    @GetMapping("/myPage")
+    public String myPage(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+
+        return "myPage";
     }
 }

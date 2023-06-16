@@ -6,11 +6,16 @@ import com.animal.animalhood.domain.SittingOrder;
 import com.animal.animalhood.service.MemberService;
 import com.animal.animalhood.service.PatService;
 import com.animal.animalhood.service.SittingOrderService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -24,14 +29,6 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model){
 
-        //test id 유저 디폴트로 입력
-   /*     Member testMember = new Member();
-        testMember.setLoginId("testId");
-        testMember.setName("testName");
-        testMember.setPassword("test123");
-        testMember.setSittingPoint(0);
-        memberService.join(testMember);*/
-
         //test id 유저의 펫 입력
    /*     Pat testPat = new Pat();
         testPat.setMember(testMember);
@@ -42,6 +39,11 @@ public class HomeController {
 
         //test order 입력
     //    sittingOrderService.order(1L, "2023-06-10T19:27", "2023-06-12T19:27", "test text");
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+        String name = userDetails.getUsername();
+        model.addAttribute("name", name);
 
         return  "home";
     }
