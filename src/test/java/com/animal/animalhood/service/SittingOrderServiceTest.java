@@ -2,7 +2,7 @@ package com.animal.animalhood.service;
 
 import com.animal.animalhood.domain.Member;
 import com.animal.animalhood.domain.OrderStatus;
-import com.animal.animalhood.domain.SitterPat;
+import com.animal.animalhood.domain.SitterPet;
 import com.animal.animalhood.domain.SittingOrder;
 import com.animal.animalhood.repository.SittingOrderRepository;
 import jakarta.persistence.EntityManager;
@@ -60,7 +60,7 @@ public class SittingOrderServiceTest {
         Member member = createMember("testId1", "testName1");
         Long orderId = sittingOrderService.order(member.getId(), "20230603", "20230606", "testDtail");
         SittingOrder order = sittingOrderRepository.findOne(orderId);
-        SitterPat sitter = new SitterPat();
+        SitterPet sitter = new SitterPet();
         sitter.setSittingOrder(order);
 
         Member member2 = createMember("testSitter", "testSitterName");
@@ -81,7 +81,7 @@ public class SittingOrderServiceTest {
         Member member = createMember("testId1", "testName1");
         Long orderId = sittingOrderService.order(member.getId(), "20230603", "20230606", "testDtail");
         SittingOrder order = sittingOrderRepository.findOne(orderId);
-        SitterPat sitter = new SitterPat();
+        SitterPet sitter = new SitterPet();
         sitter.setSittingOrder(order);
 
         Member member2 = createMember("testSitter", "testSitterName");
@@ -89,7 +89,7 @@ public class SittingOrderServiceTest {
 
         //when
         Long getSitterId = sittingOrderService.requestSitting(sitter);
-        SitterPat getSitter = sittingOrderRepository.findSitter(getSitterId);
+        SitterPet getSitter = sittingOrderRepository.findSitter(getSitterId);
         sittingOrderService.responseSitting(getSitter, OrderStatus.REJECT);
 
         //then

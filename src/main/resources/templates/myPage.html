@@ -3,12 +3,12 @@
 <head th:replace="fragments/header :: header">
     <title>환영합니다</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/popup/popup.css" />
 </head>
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div id="detailTable">
-        <input type="hidden" id="memberId" th:value="${member.id}" />
         <table class="table table-striped">
 
             <tbody>
@@ -28,14 +28,41 @@
             <tr>
                 <th>주소</th>
                 <td th:text="${member.address}"></td>
+
             </tr>
             <tr>
                 <th>반려동물명</th>
-                <!--                <td th:text="${order.pat.patName}"></td>--><td>testPat</td>
+                    <td id="petTd" th:if="${not #strings.isEmpty(member.pet[0].petName)}" th:text="${member.pet[0].petName}" ></td>
             </tr>
             </tbody>
         </table>
+        <button id="addPetBtn" class="btn btn-primary" onclick="addPet()">반려 동물 추가</button>
+    </div>
+    <div class="pop_wrap" id="addPetPopup" style="display:none">
+        <form enctype="multipart/form-data" action="/image" method="POST" name="petImage">
+            <input type="file" name="files" multiple="multiple" />
+            <input type="submit" id="submit" value="이미지 전송"/>
+        </form>
+        <form role="form" action="/pet" method="POST">
+        <div class="form-group">
+            <input type="hidden" name="memberId" id="memberId" th:value="${member.id}" />
+            <label for="petName"> 이름</label>
+            <input type="text" class="form-control" name="petName" id="petName">
+        </div>
+            <div class="form-group">
+                <label for="petAge">나이</label>
+                <input type="number" class="form-control" name="petAge" id="petAge"><p>세</p>
+            </div>
+            <button type="submit" class="btn btn-primary">추가</button>
+        </form>
 
     </div>
+</div>
+<script>
+function addPet(){
+    console.log("클릭 확인");
+    document.getElementById("addPetPopup").style.display="block";
+}
+</script>
 </body>
 </html>

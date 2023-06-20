@@ -1,14 +1,9 @@
 package com.animal.animalhood.controller;
 
-import com.animal.animalhood.domain.Member;
-import com.animal.animalhood.domain.Pat;
-import com.animal.animalhood.domain.SittingOrder;
 import com.animal.animalhood.service.MemberDetailService;
 import com.animal.animalhood.service.MemberService;
-import com.animal.animalhood.service.PatService;
+import com.animal.animalhood.service.PetService;
 import com.animal.animalhood.service.SittingOrderService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,16 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.security.Principal;
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final MemberService memberService;
     private final MemberDetailService memberDetailService;
-    private final PatService patService;
     private final SittingOrderService sittingOrderService;
 
     @GetMapping("/")

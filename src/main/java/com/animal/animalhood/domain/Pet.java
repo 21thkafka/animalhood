@@ -1,9 +1,7 @@
 package com.animal.animalhood.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -14,11 +12,11 @@ import static jakarta.persistence.FetchType.LAZY;
 @Entity
 @Getter @Setter
 //@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Pat {
+public class Pet {
 
     @Id
     @GeneratedValue
-    @Column(name="pat_id")
+    @Column(name="pet_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
@@ -31,6 +29,14 @@ public class Pat {
 
     private String gubun;
 
-    @OneToMany(mappedBy = "pat")
+    @OneToMany(mappedBy = "pet")
     private List<Image> image = new ArrayList<>();
+
+    public static Pet createPet(Member member, String name, int age){
+        Pet pet = new Pet();
+        pet.setPetName(name);
+        pet.setPetAge(age);
+        pet.setMember(member);
+        return pet;
+    }
 }

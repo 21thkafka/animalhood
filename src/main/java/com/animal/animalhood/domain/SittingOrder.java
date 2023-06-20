@@ -1,21 +1,13 @@
 package com.animal.animalhood.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.nio.file.SimpleFileVisitor;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 
-import static jakarta.persistence.FetchType.EAGER;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -34,10 +26,10 @@ public class SittingOrder {
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sitting_id")
-    private SitterPat sitterPat;
+    private SitterPet sitterPet;
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "pat_id")
-    private Pat pat;
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
 
     private String detail;
 

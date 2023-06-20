@@ -14,12 +14,12 @@ import static jakarta.persistence.FetchType.LAZY;
 public class Image {
 
     @Id @GeneratedValue
-    @Column(name="petImageNo")
+    @Column(name="pet_image_no")
     private Long imgNo;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "pat_id")
-    private Pat pat;
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
 
     private String originalName;
 
@@ -28,6 +28,8 @@ public class Image {
     private String serverName;
 
     private String serverPath;
+
+    private Long fileSize;
 
     private LocalDateTime regDate;
 }

@@ -1,0 +1,4 @@
+.pop_wrap { display: none; width: 360px; background-color: #fff; border-collapse: separate; padding: 40px 0; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 30; -webkit-box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.5); -ms-box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.5); box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.5); }
+.pop_wrap p { text-align: center; color: #000; }
+.pop_wrap p span { display: block; }
+.pop_wrap .btn_group { margin-top: 38px; }

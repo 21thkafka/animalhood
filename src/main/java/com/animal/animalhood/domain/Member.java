@@ -50,10 +50,10 @@ public class Member implements UserDetails {
     }
 
     @OneToMany(mappedBy = "member")
-    private List<Pat> pat = new ArrayList<>();
+    private List<Pet> pet = new ArrayList<>();
 
     @OneToMany (mappedBy = "member")
-    private List<SitterPat> sitterPats = new ArrayList<>();
+    private List<SitterPet> sitterPets = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){

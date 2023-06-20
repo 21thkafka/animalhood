@@ -3,13 +3,12 @@ package com.animal.animalhood.service;
 import com.animal.animalhood.domain.*;
 import com.animal.animalhood.dto.updateSittingOrder;
 import com.animal.animalhood.repository.MemberRepository;
-import com.animal.animalhood.repository.PatRepository;
+import com.animal.animalhood.repository.PetRepository;
 import com.animal.animalhood.repository.SittingOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -18,7 +17,7 @@ import java.util.List;
 public class SittingOrderService {
 
     private final MemberRepository memberRepository;
-    private final PatRepository patRepository;
+    private final PetRepository patRepository;
     private final SittingOrderRepository sittingOrderRepository;
 
     public List<SittingOrder> findList() {
@@ -81,7 +80,7 @@ public class SittingOrderService {
      * 요청 신청
      */
     @Transactional
-    public Long requestSitting(SitterPat sitter){
+    public Long requestSitting(SitterPet sitter){
         sitter.setStatus(OrderStatus.PROGRESS);
         sittingOrderRepository.requestSitting(sitter);
         return sitter.getId();
@@ -91,8 +90,8 @@ public class SittingOrderService {
      * 신청 응답
      */
     @Transactional
-    public void responseSitting(SitterPat sitter, OrderStatus status){
-        SitterPat getSitter = sittingOrderRepository.findSitter(sitter.getId());
+    public void responseSitting(SitterPet sitter, OrderStatus status){
+        SitterPet getSitter = sittingOrderRepository.findSitter(sitter.getId());
         getSitter.setStatus(status);
 
     }

@@ -1,16 +1,14 @@
 package com.animal.animalhood.service;
 
 import com.animal.animalhood.domain.Member;
-import com.animal.animalhood.domain.Pat;
-import com.animal.animalhood.dto.addMemberRequest;
+import com.animal.animalhood.domain.Pet;
 import com.animal.animalhood.repository.MemberRepository;
-import com.animal.animalhood.repository.PatRepository;
+import com.animal.animalhood.repository.PetRepository;
 import jakarta.persistence.EntityManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,9 +21,9 @@ public class MemberServiceTest {
 
     @Autowired MemberService memberService;
     @Autowired
-    PatService patService;
+    PetService patService;
     @Autowired
-    PatRepository patRepository;
+    PetRepository patRepository;
 
     @Autowired MemberRepository memberRepository;
 
@@ -52,14 +50,14 @@ public class MemberServiceTest {
     @Transactional
     public void addPatTest() throws Exception {
         //given
-        Pat pat = new Pat();
+        Pet pat = new Pet();
         pat.setPetName("보리");
         pat.setPetAge(2);
 
         //when
         joinTest();
         pat.setMember(memberRepository.findOne(0L));
-        Long savedId = patService.savePat(pat);
+        Long savedId = patService.savePat(0L, "보리", 2);
 
         //then
         assertEquals(pat, patRepository.findOne(savedId));

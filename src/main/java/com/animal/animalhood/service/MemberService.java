@@ -1,21 +1,15 @@
 package com.animal.animalhood.service;
 
 import com.animal.animalhood.domain.Member;
-import com.animal.animalhood.dto.addMemberRequest;
-import com.animal.animalhood.repository.LoginRepository;
 import com.animal.animalhood.repository.MemberRepository;
-import com.animal.animalhood.repository.PatRepository;
+import com.animal.animalhood.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.LongSummaryStatistics;
 
 @Service
 @Transactional(readOnly = true)
@@ -23,7 +17,7 @@ import java.util.LongSummaryStatistics;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final PatRepository patRepository;
+    private final PetRepository patRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**

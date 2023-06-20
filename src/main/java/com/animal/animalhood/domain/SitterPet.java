@@ -1,9 +1,7 @@
 package com.animal.animalhood.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -14,13 +12,13 @@ import static jakarta.persistence.FetchType.LAZY;
 @Entity
 @Getter @Setter
 //@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SitterPat {
+public class SitterPet {
 
     @Id @GeneratedValue
     @Column(name="sitting_id")
     private Long id;
 
-    @OneToOne(mappedBy = "sitterPat", fetch = LAZY)
+    @OneToOne(mappedBy = "sitterPet", fetch = LAZY)
     private SittingOrder sittingOrder;
 
     @ManyToOne(fetch = LAZY)
