@@ -1,5 +1,6 @@
 package com.animal.animalhood.repository;
 
+import com.animal.animalhood.domain.Image;
 import com.animal.animalhood.domain.Pet;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,9 @@ public class PetRepository {
     public List<Pet> findAll(){
         return em.createQuery("select p from Pet p", Pet.class)
                 .getResultList();
+    }
+
+    public void saveImg(Image image){
+        em.persist(image);
     }
 }

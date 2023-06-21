@@ -1,5 +1,6 @@
 package com.animal.animalhood.service;
 
+import com.animal.animalhood.domain.Image;
 import com.animal.animalhood.domain.Member;
 import com.animal.animalhood.domain.Pet;
 import com.animal.animalhood.repository.MemberRepository;
@@ -34,13 +35,19 @@ public class PetService {
         return findPat;
     }
 
-    public List<Pet> findPat(Long id){
-        List<Pet> pats = petRepository.findPat(id);
-        return pats;
+    public Pet findPat(Long id){
+        Pet pets = petRepository.findOne(id);
+        return pets;
     }
 
     public List<Pet> findPatMember(Long memberId) {
-        List<Pet> pats = petRepository.findPatMember(memberId);
-        return pats;
+        List<Pet> pets = petRepository.findPatMember(memberId);
+        return pets;
+    }
+
+    @Transactional
+    public Long saveImg(Image image){
+        petRepository.saveImg(image);
+        return image.getImgNo();
     }
 }

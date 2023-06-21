@@ -14,7 +14,7 @@ import static jakarta.persistence.FetchType.LAZY;
 public class Image {
 
     @Id @GeneratedValue
-    @Column(name="pet_image_no")
+ //   @Column(name="pet_image_no")
     private Long imgNo;
 
     @ManyToOne(fetch = LAZY)

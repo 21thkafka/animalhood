@@ -1,6 +1,7 @@
 package com.animal.animalhood.file;
 
 import com.animal.animalhood.domain.Image;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,9 +19,10 @@ import java.util.UUID;
 public class FileUploadHandler {
 
     // 루트 경로
-    private final String rootPath = "Desktop/test_image";
+ //   @Value("${Spring.servlet.multipart.location}")
+    private final String rootPath = "/Users/hyun/Desktop/work/animalhood/src/main/resources/static";
     //프로젝트 루트 경로에 있는 files 디렉토리
-    private final String fileDir = rootPath + "/files/";
+    private final String fileDir = rootPath + "/img/";
 
     public String getFullPath(String filename) { return fileDir + filename; }
 
@@ -33,7 +35,12 @@ public class FileUploadHandler {
         }
 
         String originalFilename = multipartFiles.getOriginalFilename();
-        String serverFilename = UUID.randomUUID() + "." + extractExt(originalFilename);
+
+        //이미지 파일인지 검사
+        String ext = extractExt(originalFilename);
+        System.out.println("ext : " + ext);
+        String serverFilename = UUID.randomUUID() + "." + ext;
+        String serverFilePath = serverFilename;
 
         // 파일 저장
         multipartFiles.transferTo(new File(getFullPath(serverFilename)));
@@ -41,6 +48,7 @@ public class FileUploadHandler {
         Image image = new Image();
         image.setOriginalName(originalFilename);
         image.setServerName(serverFilename);
+        image.setServerPath("/img/"+serverFilename);
 
         return image;
     }

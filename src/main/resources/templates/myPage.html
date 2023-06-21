@@ -34,16 +34,20 @@
                 <th>반려동물명</th>
                     <td id="petTd" th:if="${not #strings.isEmpty(member.pet[0].petName)}" th:text="${member.pet[0].petName}" ></td>
             </tr>
+            <tr>
+                <td> <img id="testImage" th:if="${member.pet[0].image[5].serverPath != null}"
+                          th:src="${member.pet[0].image[5].serverPath}" style="width:140px" height="auto"></td>
+            </tr>
             </tbody>
         </table>
         <button id="addPetBtn" class="btn btn-primary" onclick="addPet()">반려 동물 추가</button>
     </div>
     <div class="pop_wrap" id="addPetPopup" style="display:none">
         <form enctype="multipart/form-data" action="/image" method="POST" name="petImage">
-            <input type="file" name="files" multiple="multiple" />
-            <input type="submit" id="submit" value="이미지 전송"/>
+             <input type="file" name="files" multiple="multiple" />
+             <input type="submit" id="submit" value="이미지 전송"/>
         </form>
-        <form role="form" action="/pet" method="POST">
+        <form role="form" action="/pet" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <input type="hidden" name="memberId" id="memberId" th:value="${member.id}" />
             <label for="petName"> 이름</label>
@@ -53,6 +57,7 @@
                 <label for="petAge">나이</label>
                 <input type="number" class="form-control" name="petAge" id="petAge"><p>세</p>
             </div>
+
             <button type="submit" class="btn btn-primary">추가</button>
         </form>
 
