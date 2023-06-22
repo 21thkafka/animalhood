@@ -37,8 +37,8 @@
         <table class="table table-striped">
             <tbody>
             <tr th:each="pet, i:${member.pet}">
-                <th><img th:if="${pet.image.serverPath != null}"
-                         th:src="${pet.image.serverPath}" style="width:140px" height="auto"></th>
+                <th><img th:if="${pet.image.serverName != null}"
+                         th:src="@{|/img/${pet.image.serverName}|}" style="width:140px" height="auto"></th>
                 <td id="petTd" th:if="${pet.petName != null}" th:text="${pet.petName}" ></td>
                 <td th:if="${pet.petAge != null}" th:text="${pet.petAge}+'살'"></td>
             </tr>

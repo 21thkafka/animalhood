@@ -20,15 +20,15 @@ import java.util.UUID;
 public class FileUploadHandler {
 
     // 루트 경로
- //   @Value("${Spring.servlet.multipart.location}")
-    private final String rootPath = "/Users/hyun/Desktop/work/animalhood/src/main/resources/static";
+  /*  @Value("${imgLocation}")
+    private String rootPath;
     //프로젝트 루트 경로에 있는 files 디렉토리
     private final String fileDir = rootPath + "/img/";
 
-    public String getFullPath(String filename) { return fileDir + filename; }
+    public String getFullPath(String filename) { return fileDir + filename; }*/
 
 
-    public Image uploadFile(MultipartFile multipartFiles) throws IOException {
+    public Image uploadFile(MultipartFile multipartFiles, String imgPath) throws IOException {
         List<Image> fileList = new ArrayList<>();
 
         if (multipartFiles.isEmpty()){
@@ -42,7 +42,7 @@ public class FileUploadHandler {
         String currentDate = simpleDateFormat.format(new Date());
 
         //프로젝트 폴더 절대경로 설정
-        String absolutePath = new File("").getAbsolutePath() + "/src/main/resources/static/";
+        //String absolutePath = new File("").getAbsolutePath() + "/src/main/resources/static/";
 
     /*    String path = "img/" + currentDate;
         File file = new File(path);
@@ -54,8 +54,8 @@ public class FileUploadHandler {
         String ext = extractExt(originalFilename);
 
         String serverFilename = UUID.randomUUID() + "." + ext;
-      //  String serverFilePath = absolutePath + path + "/" + serverFilename;
-        String serverFilePath = absolutePath + "/img/" +serverFilename;
+     //   String serverFilePath = absolutePath + "/img/" +serverFilename;
+        String serverFilePath = imgPath +serverFilename;
 
         // 파일 저장
         multipartFiles.transferTo(new File(serverFilePath));
@@ -63,16 +63,16 @@ public class FileUploadHandler {
         Image image = new Image();
         image.setOriginalName(originalFilename);
         image.setServerName(serverFilename);
-        image.setServerPath("/img/" + serverFilename);
+        image.setServerPath(serverFilePath);
 
         return image;
     }
 
-    public List<Image> multiUpload(List<MultipartFile> multipartFiles) throws IOException {
+    public List<Image> multiUpload(List<MultipartFile> multipartFiles, String imgPath) throws IOException {
         List<Image> fileList = new ArrayList<>();
         for(MultipartFile multipartFile : multipartFiles){
             if(!multipartFile.isEmpty()){
-                fileList.add(uploadFile(multipartFile));
+                fileList.add(uploadFile(multipartFile, imgPath));
             }
         }
         return fileList;

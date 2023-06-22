@@ -28,10 +28,10 @@ spring:
     hibernate:
       ddl-auto: update
       format_sql: true
-  servlet:
-    multipart:
-      location: /Users/hyun/Desktop/work/animalhood/src/main/resources/static/img
 
+imgLocation: /Users/hyun/Desktop/image/
+
+uploadPath: file:///Users/hyun/Desktop/image/
 
 logging:
   level:
