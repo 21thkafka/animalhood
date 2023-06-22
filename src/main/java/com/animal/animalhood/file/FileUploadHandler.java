@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,19 +37,33 @@ public class FileUploadHandler {
 
         String originalFilename = multipartFiles.getOriginalFilename();
 
-        //이미지 파일인지 검사
+        // 날짜 가져오기
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String currentDate = simpleDateFormat.format(new Date());
+
+        //프로젝트 폴더 절대경로 설정
+        String absolutePath = new File("").getAbsolutePath() + "/src/main/resources/static/";
+
+    /*    String path = "img/" + currentDate;
+        File file = new File(path);
+        if(!file.exists()){
+            file.mkdirs();  //해당 날짜 디렉토리가 없으면 생성
+        }*/
+
+        //이미지 파일
         String ext = extractExt(originalFilename);
-        System.out.println("ext : " + ext);
+
         String serverFilename = UUID.randomUUID() + "." + ext;
-        String serverFilePath = serverFilename;
+      //  String serverFilePath = absolutePath + path + "/" + serverFilename;
+        String serverFilePath = absolutePath + "/img/" +serverFilename;
 
         // 파일 저장
-        multipartFiles.transferTo(new File(getFullPath(serverFilename)));
+        multipartFiles.transferTo(new File(serverFilePath));
 
         Image image = new Image();
         image.setOriginalName(originalFilename);
         image.setServerName(serverFilename);
-        image.setServerPath("/img/"+serverFilename);
+        image.setServerPath("/img/" + serverFilename);
 
         return image;
     }

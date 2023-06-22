@@ -24,22 +24,30 @@ public class PetController {
     @PostMapping("/pet")
     public String savePat (@RequestParam("memberId") Long memberId,
                            @RequestParam("petName") String name,
-                           @RequestParam("petAge") int age){
-        petService.savePat(memberId, name, age);
+                           @RequestParam("petAge") int age,
+                           @Validated @RequestParam("files") MultipartFile file) throws Exception{
+        Long petId = petService.savePat(memberId, name, age);
+
+        Pet addpet = petService.findPat(petId);
+        Image image = fileUploadHandler.uploadFile(file);
+
+        image.setPet(addpet);
+        Long imgNo = petService.saveImg(image);
+        System.out.println("imgNo : " + imgNo);
 
         return "redirect:/myPage";
     }
 
-    @PostMapping("/image")
-    public String saveImg (@Validated @RequestParam("files") List<MultipartFile> files)
+ /*   @PostMapping("/image")
+    public String saveImg (@Validated @RequestParam("files") MultipartFile file)
             throws Exception {
         Pet addpet = petService.findPat(1L);
-        List<Image> images = fileUploadHandler.multiUpload(files);
-        for(Image image : images){
-            image.setPet(addpet);
-            Long imgNo = petService.saveImg(image);
-            System.out.println("imgNo : " + imgNo);
-        }
+        Image image = fileUploadHandler.uploadFile(file);
+
+        image.setPet(addpet);
+        Long imgNo = petService.saveImg(image);
+        System.out.println("imgNo : " + imgNo);
+
         return "redirect:/myPage";
-    }
+    }*/
 }

@@ -1,16 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header">
-    <title>환영합니다</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/popup/popup.css" />
 </head>
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div id="detailTable">
+        <h4>회원 정보</h4>
         <table class="table table-striped">
-
             <tbody>
             <tr>
                 <th>회원 이름</th>
@@ -30,43 +27,59 @@
                 <td th:text="${member.address}"></td>
 
             </tr>
-            <tr>
-                <th>반려동물명</th>
-                    <td id="petTd" th:if="${not #strings.isEmpty(member.pet[0].petName)}" th:text="${member.pet[0].petName}" ></td>
-            </tr>
-            <tr>
-                <td> <img id="testImage" th:if="${member.pet[0].image[5].serverPath != null}"
-                          th:src="${member.pet[0].image[5].serverPath}" style="width:140px" height="auto"></td>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="petTable">
+        <h4>반려동물</h4>
+        <table class="table table-striped">
+            <tbody>
+            <tr th:each="pet, i:${member.pet}">
+                <th><img th:if="${pet.image.serverPath != null}"
+                         th:src="${pet.image.serverPath}" style="width:140px" height="auto"></th>
+                <td id="petTd" th:if="${pet.petName != null}" th:text="${pet.petName}" ></td>
+                <td th:if="${pet.petAge != null}" th:text="${pet.petAge}+'살'"></td>
             </tr>
             </tbody>
         </table>
+
         <button id="addPetBtn" class="btn btn-primary" onclick="addPet()">반려 동물 추가</button>
     </div>
-    <div class="pop_wrap" id="addPetPopup" style="display:none">
-        <form enctype="multipart/form-data" action="/image" method="POST" name="petImage">
-             <input type="file" name="files" multiple="multiple" />
-             <input type="submit" id="submit" value="이미지 전송"/>
-        </form>
+
+    <div id="addPetPopup" style="display:none">
+        <div class="pop_wrap">
+            <h5>반려동물 등록
+                <a href="javascript:popupClose()" id="popupCloseBtn" style="font-size:30px;width:20px;float: right;">x</a>
+            </h5>
         <form role="form" action="/pet" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <input type="hidden" name="memberId" id="memberId" th:value="${member.id}" />
-            <label for="petName"> 이름</label>
-            <input type="text" class="form-control" name="petName" id="petName">
-        </div>
+            <div class="form-group">
+                <input type="hidden" name="memberId" id="memberId" th:value="${member.id}" />
+                <label for="petName"> 이름</label>
+                <input type="text" class="form-control" name="petName" id="petName">
+            </div>
             <div class="form-group">
                 <label for="petAge">나이</label>
                 <input type="number" class="form-control" name="petAge" id="petAge"><p>세</p>
             </div>
+            <div>
+                <p>반려동물 사진 등록해주세요</p>
+                <input type="file" name="files" multiple="multiple" />
+            </div>
 
-            <button type="submit" class="btn btn-primary">추가</button>
+            <button type="submit" class="btn btn-primary" style="margin:10px; float:right;">추가</button>
         </form>
-
+        </div>
     </div>
 </div>
 <script>
 function addPet(){
-    console.log("클릭 확인");
     document.getElementById("addPetPopup").style.display="block";
+}
+function popupClose(){
+    console.log("팝업 닫기 클릭 확인");
+    document.getElementById("addPetPopup").style.display="none";
 }
 </script>
 </body>

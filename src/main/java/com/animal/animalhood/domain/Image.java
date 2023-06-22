@@ -17,7 +17,7 @@ public class Image {
  //   @Column(name="pet_image_no")
     private Long imgNo;
 
-    @ManyToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "pet_id")
     private Pet pet;
 

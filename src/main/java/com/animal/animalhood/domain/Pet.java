@@ -29,8 +29,11 @@ public class Pet {
 
     private String gubun;
 
-    @OneToMany(mappedBy = "pet")
-    private List<Image> image = new ArrayList<>();
+//    @OneToMany(mappedBy = "pet")
+//    private List<Image> image = new ArrayList<>();
+
+    @OneToOne(mappedBy = "pet", fetch = LAZY)
+    private Image image;
 
     public static Pet createPet(Member member, String name, int age){
         Pet pet = new Pet();
