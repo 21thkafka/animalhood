@@ -57,7 +57,7 @@ public class MemberServiceTest {
         //when
         joinTest();
         pat.setMember(memberRepository.findOne(0L));
-        Long savedId = patService.savePat(0L, "보리", 2);
+        Long savedId = patService.savePat(0L, "보리", "고양이", 2);
 
         //then
         assertEquals(pat, patRepository.findOne(savedId));

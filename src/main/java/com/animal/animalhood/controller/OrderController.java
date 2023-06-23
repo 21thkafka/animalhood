@@ -28,7 +28,6 @@ public class OrderController {
     private final SittingOrderService sittingOrderService;
     private final MemberDetailService memberDetailService;
     private final MemberService memberService;
-//    private final PatService patService;
 
     //목록
     @GetMapping("/sittingOrders")
@@ -41,7 +40,6 @@ public class OrderController {
     @GetMapping("/sittingOrder")
     public String applyForm ( Model model){
 
-//        List<Pat> pats = patService.findPat();
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;
         String email = userDetails.getUsername();
@@ -66,6 +64,13 @@ public class OrderController {
     public String detailSittingOrder (@PathVariable Long id, Model model){
         SittingOrder order = sittingOrderService.orderDetail(id);
         model.addAttribute("order", order);
+
+        //로그인한 회원 정보
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+        String email = userDetails.getUsername();
+        UserDetails user = memberDetailService.loadUserByUsername(email);
+        model.addAttribute("user", user);
 
         return "sittingOrder/sittingOrderDetail";
     }

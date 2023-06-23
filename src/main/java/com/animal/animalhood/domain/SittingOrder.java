@@ -27,9 +27,10 @@ public class SittingOrder {
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sitting_id")
     private SitterPet sitterPet;
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "pet_id")
-    private Pet pet;
+
+//    @ManyToOne(fetch = LAZY)
+//    @JoinColumn(name = "pet_id")
+//    private Pet pet;
 
     private String detail;
 

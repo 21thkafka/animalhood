@@ -25,10 +25,11 @@ public class PetController {
     @PostMapping("/pet")
     public String savePat (@RequestParam("memberId") Long memberId,
                            @RequestParam("petName") String name,
+                           @RequestParam("gubun") String gubun,
                            @RequestParam("petAge") int age,
                            @Validated @RequestParam("files") MultipartFile file,
                            @Value("${imgLocation}") String imgPath) throws Exception{
-        Long petId = petService.savePat(memberId, name, age);
+        Long petId = petService.savePat(memberId, name, gubun, age);
 
         Pet addpet = petService.findPat(petId);
         Image image = fileUploadHandler.uploadFile(file, imgPath);

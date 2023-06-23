@@ -20,9 +20,9 @@ public class PetService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long savePat(Long memberId, String name, int age){
+    public Long savePat(Long memberId, String name, String gubun, int age){
         Member member = memberRepository.findOne(memberId);
-        Pet pet = Pet.createPet(member, name, age);
+        Pet pet = Pet.createPet(member, name, gubun, age);
         petRepository.save(pet);
         return pet.getId();
     }

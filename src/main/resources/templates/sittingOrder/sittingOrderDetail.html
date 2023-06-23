@@ -6,17 +6,35 @@
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div id="detailTable">
         <input type="hidden" id="orderId" th:value="${order.id}" />
-    <table class="table table-striped">
+        <input type="hidden" id="userEmail" th:value="${user.email}" />
+        <h4>반려동물</h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>모습</th>
+                <th>이름</th>
+                <th>구분</th>
+                <th>나이</th>
 
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pet, i:${order.member.pet}">
+                <th><img th:if="${pet.image.serverName != null}"
+                         th:src="@{|/img/${pet.image.serverName}|}" style="width:140px" height="auto"></th>
+                <td th:if="${pet.petName != null}" th:text="${pet.petName}" ></td>
+                <td th:if="${pet.gubun != null}" th:text="${pet.gubun}" ></td>
+                <td th:if="${pet.petAge != null}" th:text="${pet.petAge}+'살'"></td>
+            </tr>
+            </tbody>
+        </table>
+    <table class="table table-striped">
         <tbody>
             <tr>
                 <th>회원 email</th>
-                <td th:text="${order.member.email}"></td>
+                <td id="memberEmail" th:text="${order.member.email}"></td>
             </tr>
-            <tr>
-                <th>반려동물명</th>
-                <!--                <td th:text="${order.pat.patName}"></td>--><td>testPat</td>
-            </tr>
+
             <tr>
                 <th>돌봄요청 시작일</th>
                 <td th:text="${order.startDate}"></td>
@@ -31,24 +49,43 @@
             </tr>
         </tbody>
     </table>
-        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/sittingOrder/detail?id={order.id}(id=${order.id})}'|">돌봄 신청하기</button>
+
+
+        <button type="button" class="btn btn-primary" id="apply-sitter-btn" th:onclick="|location.href='@{/sittingOrder/detail?id={order.id}(id=${order.id})}'|">돌봄 신청하기</button>
         <button type="button" class="btn btn-primary" id="modify-btn">수정하기</button>
         <button type="button" class="btn btn-primary" id="delete-btn">삭제하기</button>
     </div>
 
     <div id="updateForm" style="display:none">
+        <h4>반려동물</h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>모습</th>
+                <th>이름</th>
+                <th>구분</th>
+                <th>나이</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pet, i:${order.member.pet}">
+                <th><img th:if="${pet.image.serverName != null}"
+                         th:src="@{|/img/${pet.image.serverName}|}" style="width:140px" height="auto"></th>
+                <td th:if="${pet.petName != null}" th:text="${pet.petName}" ></td>
+                <td th:if="${pet.gubun != null}" th:text="${pet.gubun}" ></td>
+                <td th:if="${pet.petAge != null}" th:text="${pet.petAge}+'살'"></td>
+            </tr>
+            </tbody>
+        </table>
         <form role="form" th:action="@{/sittingOrder/detail/{id}(id=${order.id})}" method="post">
             <table class="table table-striped">
-
                 <tbody>
                 <tr>
                     <th><label for="email">회원 email</label></th>
                     <td><input class="form-control" id="email" th:value="${order.member.email}" readonly></td>
                 </tr>
-                <tr>
-                    <th>반려동물명</th>
-                    <!--                <td th:text="${order.pet.petName}"></td>--><td>testPet</td>
-                </tr>
+
                 <tr>
                     <th>돌봄요청 시작일</th>
                     <td><input type="datetime-local" name="strDate" class="form-control" id="startDate" th:value="${order.startDate}"></td>
@@ -63,7 +100,6 @@
                 </tr>
                 </tbody>
             </table>
-
             <button type="button" class="btn btn-primary" id="update-btn">수정완료</button>
         </form>
     </div>

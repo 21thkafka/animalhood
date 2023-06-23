@@ -35,10 +35,11 @@ public class Pet {
     @OneToOne(mappedBy = "pet", fetch = LAZY)
     private Image image;
 
-    public static Pet createPet(Member member, String name, int age){
+    public static Pet createPet(Member member, String name, String gubun, int age){
         Pet pet = new Pet();
         pet.setPetName(name);
         pet.setPetAge(age);
+        pet.setGubun(gubun);
         pet.setMember(member);
         return pet;
     }
