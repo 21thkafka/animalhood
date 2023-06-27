@@ -1,3 +1,4 @@
+.pop_group { position: absolute; top: 0; left: 0; width: 100%; height:100%; background:rgba(0,0,0,0.4); }
 .pop_wrap { position: absolute;
                 padding: 15px;
                 box-sizing: border-box;
