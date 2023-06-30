@@ -1,8 +1,11 @@
 package com.animal.animalhood.controller;
 
 
+import com.animal.animalhood.domain.Member;
+import com.animal.animalhood.domain.SitterPet;
 import com.animal.animalhood.domain.SittingOrder;
 
+import com.animal.animalhood.dto.addSitterRequest;
 import com.animal.animalhood.dto.updateSittingOrder;
 import com.animal.animalhood.service.MemberDetailService;
 import com.animal.animalhood.service.MemberService;
@@ -11,6 +14,7 @@ import com.animal.animalhood.service.SittingOrderService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -92,6 +96,19 @@ public class OrderController {
     public ResponseEntity<Void> deleteSittingOrder(@PathVariable Long id){
         sittingOrderService.deleteOrder(id);
 
+        return ResponseEntity.ok()
+                .build();
+    }
+
+    //돌봄 요청 신청
+    @PostMapping("/sittingOrder/sitter")
+    public ResponseEntity<Void> applySitter(@RequestBody addSitterRequest req){
+        Member member = memberService.findOne(req.getEmail());
+        SittingOrder order = sittingOrderService.orderDetail(req.getOrderId());
+        SitterPet sitter = new SitterPet();
+        sitter.setMember(member);
+        sitter.setSittingOrder(order);
+        SitterPet savedSitter = sittingOrderService.requestSitting(sitter);
         return ResponseEntity.ok()
                 .build();
     }

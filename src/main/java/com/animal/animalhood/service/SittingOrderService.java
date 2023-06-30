@@ -80,10 +80,11 @@ public class SittingOrderService {
      * 요청 신청
      */
     @Transactional
-    public Long requestSitting(SitterPet sitter){
+    public SitterPet requestSitting(SitterPet sitter){
         sitter.setStatus(OrderStatus.PROGRESS);
-        sittingOrderRepository.requestSitting(sitter);
-        return sitter.getId();
+        SitterPet savedSitter = sittingOrderRepository.requestSitting(sitter);
+    //    return sitter.getId();
+        return savedSitter;
     }
 
     /**

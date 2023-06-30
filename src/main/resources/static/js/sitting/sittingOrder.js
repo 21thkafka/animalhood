@@ -2,10 +2,10 @@
 const modifyButton = document.getElementById('modify-btn');
 const applySitterButton = document.getElementById('apply-sitter-btn');
 const deleteButton = document.getElementById('delete-btn');
-const memberId = document.getElementById('email').value;
+const memberEmail = document.getElementById('email').value;
 const userEmail = document.getElementById('userEmail').value;
 
-if(memberId == userEmail){
+if(memberEmail == userEmail){
     applySitterButton.style.display = 'none';
 } else {
     modifyButton.style.display = 'none';
@@ -17,7 +17,7 @@ if (modifyButton){
         var detail = document.getElementById("detailTable");
         var update = document.getElementById("updateForm");
         modifyButton.addEventListener('click', event => {
-            if(memberId == userEmail){
+            if(memberEmail == userEmail){
                 detail.style.display = 'none';
                 update.style.display = 'block';
             } else {
@@ -32,7 +32,7 @@ const updateButton = document.getElementById('update-btn');
 
 if (updateButton) {
     updateButton.addEventListener('click', event => {
-        if(memberId == userEmail){
+        if(memberEmail == userEmail){
             let url = window.location.href;
                     let id = url.charAt(url.length - 1);
 
@@ -63,7 +63,7 @@ if (updateButton) {
 if (deleteButton) {
 
         deleteButton.addEventListener('click', event => {
-            if(memberId == userEmail){
+            if(memberEmail == userEmail){
                 let id = document.getElementById('orderId').value;
                 fetch(`/sittingOrder/detail/${id}`, {
                     method: 'DELETE'
@@ -79,3 +79,26 @@ if (deleteButton) {
 
 }
 
+//돌봄 신청
+if(applySitterButton){
+    applySitterButton.addEventListener('click', event =>{
+        if(memberEmail != userEmail){
+            let url = window.location.href;
+            let id = url.charAt(url.length - 1);
+            fetch(`/sittingOrder/sitter`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: userEmail,
+                    orderId: document.getElementById('orderId').value
+                })
+            })
+                .then(() => {
+                    alert('돌본 신청 됐습니다');
+                    location.replace('/myPage')
+                });
+        }
+    });
+}

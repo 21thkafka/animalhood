@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import static jakarta.persistence.FetchType.LAZY;
@@ -24,9 +26,8 @@ public class SittingOrder {
     @JoinColumn(name="member_id")
     private Member member;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "sitting_id")
-    private SitterPet sitterPet;
+    @OneToMany(mappedBy = "sittingOrder")
+    private List<SitterPet> sitterPet = new ArrayList<>();
 
 //    @ManyToOne(fetch = LAZY)
 //    @JoinColumn(name = "pet_id")

@@ -25,7 +25,10 @@ public class SittingOrderRepository {
                 .getResultList();
     }
 
-    public void requestSitting(SitterPet sitter){ em.persist(sitter); }
+    public SitterPet requestSitting(SitterPet sitter){
+        em.persist(sitter);
+        return sitter;
+    }
 
     public SitterPet findSitter(Long id){
         return em.find(SitterPet.class, id);

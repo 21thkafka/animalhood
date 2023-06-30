@@ -67,12 +67,12 @@ public class SittingOrderServiceTest {
         sitter.setMember(member2);
 
         //when
-        Long getSitterId = sittingOrderService.requestSitting(sitter);
+        SitterPet getSitter = sittingOrderService.requestSitting(sitter);
 
         //then
-        assertEquals(orderId, sittingOrderRepository.findSitter(getSitterId).getSittingOrder().getId());
-        assertEquals(member2.getId(), sittingOrderRepository.findSitter(getSitterId).getMember().getId());
-        assertEquals(OrderStatus.PROGRESS, sittingOrderRepository.findSitter(getSitterId).getStatus());
+        assertEquals(orderId, getSitter.getSittingOrder().getId());
+        assertEquals(member2.getId(), getSitter.getMember().getId());
+        assertEquals(OrderStatus.PROGRESS, getSitter.getStatus());
     }
 
     @Test
@@ -88,12 +88,12 @@ public class SittingOrderServiceTest {
         sitter.setMember(member2);
 
         //when
-        Long getSitterId = sittingOrderService.requestSitting(sitter);
-        SitterPet getSitter = sittingOrderRepository.findSitter(getSitterId);
-        sittingOrderService.responseSitting(getSitter, OrderStatus.REJECT);
+        SitterPet getSitterId = sittingOrderService.requestSitting(sitter);
+        //SitterPet getSitter = sittingOrderRepository.findSitter(getSitterId);
+        sittingOrderService.responseSitting(getSitterId, OrderStatus.REJECT);
 
         //then
-        assertEquals(OrderStatus.REJECT, getSitter.getStatus());
+        assertEquals(OrderStatus.REJECT, getSitterId.getStatus());
     }
 
     private Member createMember(String email, String name) {

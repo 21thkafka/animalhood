@@ -18,7 +18,8 @@ public class SitterPet {
     @Column(name="sitting_id")
     private Long id;
 
-    @OneToOne(mappedBy = "sitterPet", fetch = LAZY)
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "order_id")
     private SittingOrder sittingOrder;
 
     @ManyToOne(fetch = LAZY)
