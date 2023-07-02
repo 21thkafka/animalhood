@@ -3,6 +3,7 @@ package com.animal.animalhood.service;
 import com.animal.animalhood.domain.Image;
 import com.animal.animalhood.domain.Member;
 import com.animal.animalhood.domain.Pet;
+import com.animal.animalhood.domain.SitterPet;
 import com.animal.animalhood.repository.MemberRepository;
 import com.animal.animalhood.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
@@ -49,5 +50,10 @@ public class PetService {
     public Long saveImg(Image image){
         petRepository.saveImg(image);
         return image.getImgNo();
+    }
+
+    public List<SitterPet> findSitterPet(String email){
+        List<SitterPet> findSitterPet = petRepository.findSitterPet(email);
+        return findSitterPet;
     }
 }

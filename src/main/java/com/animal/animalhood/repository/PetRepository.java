@@ -2,6 +2,7 @@ package com.animal.animalhood.repository;
 
 import com.animal.animalhood.domain.Image;
 import com.animal.animalhood.domain.Pet;
+import com.animal.animalhood.domain.SitterPet;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -42,5 +43,17 @@ public class PetRepository {
 
     public void saveImg(Image image){
         em.persist(image);
+    }
+
+    public List<SitterPet> findSitterPet(String email){
+        return em.createQuery("select p from SitterPet p" +
+                " inner join p.member m where m.email = :email", SitterPet.class)
+                .setParameter("email", email)
+                .getResultList();
+      /*  return em.createQuery("select p from SitterPet p"
+                        + "inner join p.member m where m.memberId = :memberId", SitterPet.class)
+                .setParameter("memberId", memberId)
+                .getResultList();*/
+
     }
 }

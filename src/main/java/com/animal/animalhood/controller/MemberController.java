@@ -59,6 +59,8 @@ public class MemberController {
         UserDetails member = memberDetailService.loadUserByUsername(email);
         model.addAttribute("member", member);
 
+
+
         return "myPage";
     }
 }
