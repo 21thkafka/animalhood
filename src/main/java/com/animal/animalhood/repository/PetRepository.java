@@ -3,6 +3,7 @@ package com.animal.animalhood.repository;
 import com.animal.animalhood.domain.Image;
 import com.animal.animalhood.domain.Pet;
 import com.animal.animalhood.domain.SitterPet;
+import com.animal.animalhood.domain.SittingOrder;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -45,15 +46,13 @@ public class PetRepository {
         em.persist(image);
     }
 
-    public List<SitterPet> findSitterPet(String email){
-        return em.createQuery("select p from SitterPet p" +
-                " inner join p.member m where m.email = :email", SitterPet.class)
+    public List<SittingOrder> findSitterPet(String email){
+        return em.createQuery("select o from SittingOrder o" +
+                " inner join o.sitterPets p" +
+                " inner join p.member m where m.email = :email", SittingOrder.class)
                 .setParameter("email", email)
                 .getResultList();
-      /*  return em.createQuery("select p from SitterPet p"
-                        + "inner join p.member m where m.memberId = :memberId", SitterPet.class)
-                .setParameter("memberId", memberId)
-                .getResultList();*/
+
 
     }
 }

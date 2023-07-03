@@ -51,12 +51,52 @@
 
     <div>
         <h4>돌봄요청 작성글</h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>요청번호</th>
+                <th>돌봄시작날짜</th>
+                <th>돌봄종료날짜</th>
+                <th>등록날짜</th>
+                <th>신청자</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <tr th:each="sitting, i:${member.sittingOrders}">
+                    <td th:text="${sitting.id}"></td>
+                    <td th:text="${sitting.startDate}"></td>
+                    <td th:text="${sitting.endDate}"></td>
+                    <td th:text="${sitting.regDate}"></td>
+                    <td>조회</td>
+                </tr>
 
+            </tr>
+            </tbody>
+        </table>
     </div>
 
     <div>
         <h4>돌봄요청 신청</h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>신청번호</th>
+                <th>신청날짜</th>
+                <th>상태</th>
+                <th></th>
+            </tr>
+            </thead>
 
+            <tbody>
+            <tr th:each="item :${order}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.sitterPets[0].regDate}"></td>
+                <td th:text="${item.status}"></td>
+                <td><a th:href="@{/sittingOrder/detail/{id}(id=${item.id})}">조회</a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="pop_group" id="addPetPopup" style="display:none">

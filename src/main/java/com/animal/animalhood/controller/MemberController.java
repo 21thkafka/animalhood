@@ -1,10 +1,13 @@
 package com.animal.animalhood.controller;
 
 import com.animal.animalhood.domain.Member;
+import com.animal.animalhood.domain.SitterPet;
+import com.animal.animalhood.domain.SittingOrder;
 import com.animal.animalhood.dto.addMemberRequest;
 import com.animal.animalhood.dto.loginRequest;
 import com.animal.animalhood.service.MemberDetailService;
 import com.animal.animalhood.service.MemberService;
+import com.animal.animalhood.service.PetService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +19,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
     private final MemberDetailService memberDetailService;
+
+    private final PetService petService;
 
     @GetMapping("/login")
     public String login(){
@@ -59,7 +66,8 @@ public class MemberController {
         UserDetails member = memberDetailService.loadUserByUsername(email);
         model.addAttribute("member", member);
 
-
+        List<SittingOrder> order = petService.findSitterPet(email);
+        model.addAttribute("order", order);
 
         return "myPage";
     }

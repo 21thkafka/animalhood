@@ -2,6 +2,7 @@ package com.animal.animalhood.service;
 
 import com.animal.animalhood.domain.OrderStatus;
 import com.animal.animalhood.domain.SitterPet;
+import com.animal.animalhood.domain.SittingOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,10 @@ public class petServiceTest {
        // Long memberId = 2L;
 
         //when
-        List<SitterPet> findSitterPet = petService.findSitterPet(email);
+        List<SittingOrder> findSitterPet = petService.findSitterPet(email);
 
         //then
-
         assertEquals(OrderStatus.PROGRESS, findSitterPet.get(0).getStatus());
+
     }
 }

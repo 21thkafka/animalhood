@@ -27,7 +27,7 @@ public class SittingOrder {
     private Member member;
 
     @OneToMany(mappedBy = "sittingOrder")
-    private List<SitterPet> sitterPet = new ArrayList<>();
+    private List<SitterPet> sitterPets = new ArrayList<>();
 
 //    @ManyToOne(fetch = LAZY)
 //    @JoinColumn(name = "pet_id")
