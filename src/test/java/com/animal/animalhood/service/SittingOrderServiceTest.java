@@ -13,6 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -94,6 +96,18 @@ public class SittingOrderServiceTest {
 
         //then
         assertEquals(OrderStatus.REJECT, getSitterId.getStatus());
+    }
+
+    @Test
+    public void sitterListTest() throws Exception {
+        //given
+        Long id = 1L;
+
+        //when
+        List<Member> sitters = sittingOrderService.sitterList(id);
+
+        //then
+        assertEquals("신동석", sitters.get(0).getName());
     }
 
     private Member createMember(String email, String name) {

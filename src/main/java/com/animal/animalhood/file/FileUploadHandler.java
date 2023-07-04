@@ -1,9 +1,7 @@
 package com.animal.animalhood.file;
 
 import com.animal.animalhood.domain.Image;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;

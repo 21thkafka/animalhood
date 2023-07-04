@@ -64,11 +64,12 @@
             <tbody>
             <tr>
                 <tr th:each="sitting, i:${member.sittingOrders}">
-                    <td th:text="${sitting.id}"></td>
+                    <td id="sittingId" th:text="${sitting.id}"></td>
                     <td th:text="${sitting.startDate}"></td>
                     <td th:text="${sitting.endDate}"></td>
                     <td th:text="${sitting.regDate}"></td>
-                    <td>조회</td>
+                    <td><a href="javascript:sitterPopup()">조회</a></td>
+
                 </tr>
 
             </tr>
@@ -144,6 +145,11 @@ function addPet(){
 function popupClose(){
     console.log("팝업 닫기 클릭 확인");
     document.getElementById("addPetPopup").style.display="none";
+}
+function sitterPopup(){
+    let sittingId = document.getElementById("sittingId").innerText;
+    let url = "/sittingOrder/sitters/" + sittingId;
+    window.open(url, "_blank", "toolbar=yes,top=10,left=500,width=500,height=500");
 }
 </script>
 </body>

@@ -113,6 +113,16 @@ public class OrderController {
                 .build();
     }
 
+    //돌봄 요청 신청자 조회
+    @GetMapping("/sittingOrder/sitters/{id}")
+    public String sittersList(@PathVariable Long id, Model model){
+
+        List<Member> sitterPets = sittingOrderService.sitterList(id);
+        model.addAttribute("sitter", sitterPets);
+
+        return "sittingOrder/sittersList";
+    }
+
     @Data
     @AllArgsConstructor
     static class UpdateOrderResponse {

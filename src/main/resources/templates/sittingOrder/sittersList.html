@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+<div class="container">
+<!--    <div th:replace="fragments/bodyHeader :: bodyHeader"/>-->
+    <div id="detailTable">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>이메일</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sitter :${sitter}">
+            <td th:text="${sitter.email}"></td>
+            <td>수락하기</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+</body>
+</html>

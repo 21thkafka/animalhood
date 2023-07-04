@@ -1,5 +1,6 @@
 package com.animal.animalhood.repository;
 
+import com.animal.animalhood.domain.Member;
 import com.animal.animalhood.domain.SitterPet;
 import com.animal.animalhood.domain.SittingOrder;
 import jakarta.persistence.EntityManager;
@@ -30,11 +31,16 @@ public class SittingOrderRepository {
         return sitter;
     }
 
-    public SitterPet findSitter(Long id){
-        return em.find(SitterPet.class, id);
-    }
+    public SitterPet findSitter(Long id){ return em.find(SitterPet.class, id); }
 
     public void delete(SittingOrder order) {
         em.remove(order);
+    }
+
+    public List<Member> sitterPetList (Long id) {
+        return em.createQuery("select m from Member m inner join m.sitterPets p" +
+                " where p.id = :id", Member.class)
+                .setParameter("id", id)
+                .getResultList();
     }
 }

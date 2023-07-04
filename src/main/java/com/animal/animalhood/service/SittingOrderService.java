@@ -88,6 +88,15 @@ public class SittingOrderService {
     }
 
     /**
+     * 신청목록
+     */
+    @Transactional
+    public List<Member> sitterList(Long id){
+        List<Member> sitters = sittingOrderRepository.sitterPetList(id);
+        return sitters;
+    }
+
+    /**
      * 신청 응답
      */
     @Transactional
