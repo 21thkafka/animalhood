@@ -48,8 +48,8 @@ public class PetRepository {
 
     public List<SittingOrder> findSitterPet(String email){
         return em.createQuery("select o from SittingOrder o" +
-                " inner join o.sitterPets p" +
-                " inner join p.member m where m.email = :email", SittingOrder.class)
+                " join fetch o.sitterPets p" +
+                " join fetch p.member m where m.email = :email", SittingOrder.class)
                 .setParameter("email", email)
                 .getResultList();
 
