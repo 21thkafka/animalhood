@@ -103,7 +103,8 @@ public class SittingOrderService {
     public void responseSitting(SitterPet sitter, OrderStatus status){
         SitterPet getSitter = sittingOrderRepository.findSitter(sitter.getId());
         getSitter.setStatus(status);
-
+        // 나머지 신청자 REJECT 처리
+        sittingOrderRepository.rejectUpdate(sitter.getId());
     }
 
     /**

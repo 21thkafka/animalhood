@@ -11,6 +11,7 @@
         <tr>
             <th>이메일</th>
             <th>시팅포인트</th>
+            <th>상태</th>
             <th></th>
         </tr>
         </thead>
@@ -18,8 +19,9 @@
         <tr th:each="sitter :${sitter}">
             <th th:text="${sitter.email}"></th>
             <th th:text="${sitter.sittingPoint}"></th>
-            <th><button type="button" class="btn btn-primary" style="padding: 3px 7px" onclick="response('Y')">수락</button>
-                <button type="button" class="btn btn-primary" style="padding: 3px 7px" onclick="response('N')">거절</button>
+            <th th:text="${sitter.sitterPets[0].status}"></th>
+            <th><button type="button" class="btn btn-primary" style="padding: 3px 7px" th:onclick="response('Y',[[${sitter.sitterPets[0].id}]])">수락</button>
+                <button type="button" class="btn btn-primary" style="padding: 3px 7px" th:onclick="response('N', [[${sitter.sitterPets[0].id}]])">거절</button>
             </th>
         </tr>
 
@@ -31,7 +33,7 @@
 
 </body>
 <script>
-    function response(status){
+    function response(status, sittingId){
         let url = window.location.href;
         let id = url.charAt(url.length - 1);
 
@@ -41,12 +43,12 @@
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            id: id,
+            id: sittingId,
             status: status
         })
     })
         .then(() => {
-            alert('수락 했습니다');
+            alert('수락 했습니다 ' + sittingId);
             opener.location.reload();
             window.close();
         });

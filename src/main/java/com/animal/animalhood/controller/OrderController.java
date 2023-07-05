@@ -16,7 +16,6 @@ import com.animal.animalhood.service.SittingOrderService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -107,9 +107,14 @@ public class OrderController {
     public ResponseEntity<Void> applySitter(@RequestBody addSitterRequest req){
         Member member = memberService.findOne(req.getEmail());
         SittingOrder order = sittingOrderService.orderDetail(req.getOrderId());
+
         SitterPet sitter = new SitterPet();
         sitter.setMember(member);
         sitter.setSittingOrder(order);
+
+        //날짜 등록
+        LocalDateTime regDate = LocalDateTime.now();
+        sitter.setRegDate(regDate);
         SitterPet savedSitter = sittingOrderService.requestSitting(sitter);
         return ResponseEntity.ok()
                 .build();
@@ -127,8 +132,8 @@ public class OrderController {
 
     //돌봄 요청 신청자 응답
     @PutMapping("/sittingOrder/sitter/{id}/")
-    public ResponseEntity<sitterApplyResponse> sitterResponse(@PathVariable Long id,
-                                                              @RequestBody sitterApplyResponse rep, Model model){
+    public ResponseEntity<sitterApplyResponse> sitterResponse(@RequestBody sitterApplyResponse rep, Model model){
+        Long id = rep.getId();
         SitterPet sitter = sittingOrderService.findSitter(id);
         String answer = rep.getStatus();
         OrderStatus status = null;

@@ -1,6 +1,7 @@
 package com.animal.animalhood.repository;
 
 import com.animal.animalhood.domain.Member;
+import com.animal.animalhood.domain.OrderStatus;
 import com.animal.animalhood.domain.SitterPet;
 import com.animal.animalhood.domain.SittingOrder;
 import jakarta.persistence.EntityManager;
@@ -38,9 +39,19 @@ public class SittingOrderRepository {
     }
 
     public List<Member> sitterPetList (Long id) {
-        return em.createQuery("select m from Member m inner join m.sitterPets p" +
-                " where p.id = :id", Member.class)
+        return em.createQuery("select m from Member m join fetch m.sitterPets p" +
+                " join fetch p.sittingOrder o " +
+                " where o.id = :id", Member.class)
                 .setParameter("id", id)
                 .getResultList();
+    }
+
+    public void rejectUpdate(Long id){
+        OrderStatus status = OrderStatus.REJECT;
+        em.createQuery("update SitterPet p set p.status = :status where p.id != :id")
+                .setParameter("id", id)
+                .setParameter("status", status)
+                .executeUpdate();
+        em.clear(); //벌크 연산 수행 후 영속성 컨텍스트 초기화
     }
 }

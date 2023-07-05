@@ -110,6 +110,25 @@ public class SittingOrderServiceTest {
         assertEquals("신동석", sitters.get(0).getName());
     }
 
+    @Test
+    public void updateRejectTest(){
+        //given
+        Long id = 1L;
+        SitterPet sitter = sittingOrderService.findSitter(id);
+        OrderStatus status = OrderStatus.ACCEPT;
+
+        //when
+        sittingOrderService.responseSitting(sitter, status);
+        SitterPet afterSitter = sittingOrderService.findSitter(id);
+        SitterPet afterRejectSitter = sittingOrderService.findSitter(50052L);
+        SitterPet afterRejectSitter2 = sittingOrderService.findSitter(50053L);
+
+        //then
+        assertEquals(OrderStatus.ACCEPT, afterSitter.getStatus());
+        assertEquals(OrderStatus.REJECT, afterRejectSitter.getStatus());
+        assertEquals(OrderStatus.REJECT, afterRejectSitter2.getStatus());
+    }
+
     private Member createMember(String email, String name) {
         Member member = new Member();
         member.setEmail(email);
@@ -118,4 +137,6 @@ public class SittingOrderServiceTest {
         em.persist(member);
         return member;
     }
+
+
 }
