@@ -10,18 +10,48 @@
         <thead>
         <tr>
             <th>이메일</th>
+            <th>시팅포인트</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="sitter :${sitter}">
-            <td th:text="${sitter.email}"></td>
-            <td>수락하기</td>
+            <th th:text="${sitter.email}"></th>
+            <th th:text="${sitter.sittingPoint}"></th>
+            <th><button type="button" class="btn btn-primary" style="padding: 3px 7px" onclick="response('Y')">수락</button>
+                <button type="button" class="btn btn-primary" style="padding: 3px 7px" onclick="response('N')">거절</button>
+            </th>
         </tr>
+
+
         </tbody>
     </table>
     </div>
 </div>
 
 </body>
+<script>
+    function response(status){
+        let url = window.location.href;
+        let id = url.charAt(url.length - 1);
+
+        fetch(`/sittingOrder/sitter/${id}/`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id: id,
+            status: status
+        })
+    })
+        .then(() => {
+            alert('수락 했습니다');
+            opener.location.reload();
+            window.close();
+        });
+
+        }
+</script>
+
 </html>

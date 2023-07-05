@@ -106,4 +106,12 @@ public class SittingOrderService {
 
     }
 
+    /**
+     * sitter 조회
+     */
+    public SitterPet findSitter(Long id){
+        SitterPet sitter = sittingOrderRepository.findSitter(id);
+        return sitter;
+    }
+
 }

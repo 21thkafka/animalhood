@@ -2,10 +2,12 @@ package com.animal.animalhood.controller;
 
 
 import com.animal.animalhood.domain.Member;
+import com.animal.animalhood.domain.OrderStatus;
 import com.animal.animalhood.domain.SitterPet;
 import com.animal.animalhood.domain.SittingOrder;
 
 import com.animal.animalhood.dto.addSitterRequest;
+import com.animal.animalhood.dto.sitterApplyResponse;
 import com.animal.animalhood.dto.updateSittingOrder;
 import com.animal.animalhood.service.MemberDetailService;
 import com.animal.animalhood.service.MemberService;
@@ -121,6 +123,24 @@ public class OrderController {
         model.addAttribute("sitter", sitterPets);
 
         return "sittingOrder/sittersList";
+    }
+
+    //돌봄 요청 신청자 응답
+    @PutMapping("/sittingOrder/sitter/{id}/")
+    public ResponseEntity<sitterApplyResponse> sitterResponse(@PathVariable Long id,
+                                                              @RequestBody sitterApplyResponse rep, Model model){
+        SitterPet sitter = sittingOrderService.findSitter(id);
+        String answer = rep.getStatus();
+        OrderStatus status = null;
+        if(answer.equals("Y")){
+            status = OrderStatus.ACCEPT;
+        } else if(answer.equals("N")){
+            status = OrderStatus.REJECT;
+        }
+
+        sittingOrderService.responseSitting(sitter, status);
+        
+        return ResponseEntity.ok().build();
     }
 
     @Data

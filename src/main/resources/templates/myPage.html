@@ -92,7 +92,7 @@
             <tbody>
             <tr th:each="item :${order}">
                 <td th:text="${item.id}"></td>
-                <td th:text="${item.sitterPets[0].regDate}"></td>
+                <td th:text="${item.sitterPets[1].regDate}"></td>
                 <td th:text="${item.status}"></td>
                 <td><a th:href="@{/sittingOrder/detail/{id}(id=${item.id})}">조회</a></td>
             </tr>

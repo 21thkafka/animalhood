@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import static jakarta.persistence.FetchType.EAGER;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -22,7 +23,7 @@ public class SittingOrder {
     @Column(name="order_id")
     private Long id;
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = EAGER)
     @JoinColumn(name="member_id")
     private Member member;
 
