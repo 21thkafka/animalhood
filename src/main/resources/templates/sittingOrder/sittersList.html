@@ -4,12 +4,12 @@
 </head>
 <body>
 <div class="container">
-<!--    <div th:replace="fragments/bodyHeader :: bodyHeader"/>-->
     <div id="detailTable">
     <table class="table table-striped">
         <thead>
         <tr>
             <th>이메일</th>
+            <th>반려동물</th>
             <th>시팅포인트</th>
             <th>상태</th>
             <th></th>
@@ -17,7 +17,8 @@
         </thead>
         <tbody>
         <tr th:each="sitter :${sitter}">
-            <th th:text="${sitter.email}"></th>
+             <th th:text="${sitter.email}"></th>
+            <th><a th:href="@{/sittingOrder/sitter/pet/{id}(id=${sitter.id})}">펫보기</a></th>
             <th th:text="${sitter.sittingPoint}"></th>
             <th th:text="${sitter.sitterPets[0].status}"></th>
             <th><button type="button" class="btn btn-primary" style="padding: 3px 7px" th:onclick="response('Y',[[${sitter.sitterPets[0].id}]])">수락</button>

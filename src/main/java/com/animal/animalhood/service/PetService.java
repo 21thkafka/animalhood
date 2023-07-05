@@ -38,8 +38,8 @@ public class PetService {
         return pets;
     }
 
-    public List<Pet> findPatMember(Long memberId) {
-        List<Pet> pets = petRepository.findPatMember(memberId);
+    public List<Pet> findPetMember(Long memberId) {
+        List<Pet> pets = petRepository.findPetMember(memberId);
         return pets;
     }
 

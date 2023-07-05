@@ -31,9 +31,9 @@ public class PetRepository {
                 .getResultList();
     }
 
-    public List<Pet> findPatMember(Long memberId){
-        return em.createQuery("select p from Pet p where memberId = :memberId", Pet.class)
-                .setParameter("memberId", memberId)
+    public List<Pet> findPetMember(Long id){
+        return em.createQuery("select p from Pet p inner join p.member m where m.id = :id", Pet.class)
+                .setParameter("id", id)
                 .getResultList();
     }
 

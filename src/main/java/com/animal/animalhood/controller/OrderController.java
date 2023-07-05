@@ -1,10 +1,7 @@
 package com.animal.animalhood.controller;
 
 
-import com.animal.animalhood.domain.Member;
-import com.animal.animalhood.domain.OrderStatus;
-import com.animal.animalhood.domain.SitterPet;
-import com.animal.animalhood.domain.SittingOrder;
+import com.animal.animalhood.domain.*;
 
 import com.animal.animalhood.dto.addSitterRequest;
 import com.animal.animalhood.dto.sitterApplyResponse;
@@ -12,6 +9,7 @@ import com.animal.animalhood.dto.updateSittingOrder;
 import com.animal.animalhood.service.MemberDetailService;
 import com.animal.animalhood.service.MemberService;
 
+import com.animal.animalhood.service.PetService;
 import com.animal.animalhood.service.SittingOrderService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +22,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -34,6 +31,8 @@ public class OrderController {
     private final SittingOrderService sittingOrderService;
     private final MemberDetailService memberDetailService;
     private final MemberService memberService;
+
+    private final PetService petService;
 
     //목록
     @GetMapping("/sittingOrders")
@@ -128,6 +127,14 @@ public class OrderController {
         model.addAttribute("sitter", sitterPets);
 
         return "sittingOrder/sittersList";
+    }
+
+    //돌봄 요청 신청자 반려동물 리스트 조회
+    @GetMapping("/sittingOrder/sitter/pet/{id}")
+    public String sitterPetList(@PathVariable Long id, Model model){
+        List<Pet> petMember = petService.findPetMember(id);
+        model.addAttribute("pet", petMember);
+        return "sittingOrder/sitterPetList";
     }
 
     //돌봄 요청 신청자 응답
