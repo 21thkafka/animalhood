@@ -65,9 +65,9 @@
             <tr>
                 <tr th:each="sitting, i:${member.sittingOrders}">
                     <td id="sittingId" th:text="${sitting.id}"></td>
-                    <td th:text="${sitting.startDate}"></td>
-                    <td th:text="${sitting.endDate}"></td>
-                    <td th:text="${sitting.regDate}"></td>
+                    <td th:text="${#temporals.format(sitting.startDate, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${#temporals.format(sitting.endDate, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${#temporals.format(sitting.regDate, 'yyyy-MM-dd HH:mm')}"></td>
                     <td><a href="javascript:sitterPopup()">조회</a></td>
 
                 </tr>
@@ -92,7 +92,7 @@
             <tbody>
             <tr th:each="item :${order}">
                 <td th:text="${item.id}"></td>
-                <td th:text="${item.sitterPets[0].regDate}"></td>
+                <td th:text="${#temporals.format(item.sitterPets[0].regDate, 'yyyy-MM-dd HH:mm')}"></td>
                 <td th:text="${item.sitterPets[0].status}"></td>
                 <td><a th:href="@{/sittingOrder/detail/{id}(id=${item.id})}">조회</a></td>
             </tr>

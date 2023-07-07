@@ -29,9 +29,9 @@
                 <td th:text="${item.member.email}"></td>
 <!--                <td th:text="${item.pat[0].petName}"></td>-->
 <!--                <td th:text="${item.pat[0].petAge}"></td>-->
-                <td th:text="${item.startDate}"></td>
-                <td th:text="${item.endDate}"></td>
-                <td th:text="${item.regDate}"></td>
+                <td th:text="${#temporals.format(item.startDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(item.endDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(item.regDate, 'yyyy-MM-dd HH:mm')}"></td>
                 <td>
 <!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
 <!--                       th:href="'javascript:cancel('+${item.id}+')'"-->

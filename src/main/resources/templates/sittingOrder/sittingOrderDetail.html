@@ -37,11 +37,11 @@
 
             <tr>
                 <th>돌봄요청 시작일</th>
-                <td th:text="${order.startDate}"></td>
+                <td th:text="${#temporals.format(order.startDate, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             <tr>
                 <th>돌봄요청 종료일</th>
-                <td th:text="${order.endDate}"></td>
+                <td th:text="${#temporals.format(order.endDate, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             <tr>
                 <th>상세 내용</th>
@@ -88,11 +88,11 @@
 
                 <tr>
                     <th>돌봄요청 시작일</th>
-                    <td><input type="datetime-local" name="strDate" class="form-control" id="startDate" th:value="${order.startDate}"></td>
+                    <td><input type="datetime-local" name="strDate" class="form-control" id="startDate" th:value="${#temporals.format(order.startDate, 'yyyy-MM-dd HH:mm')}"></td>
                 </tr>
                 <tr>
                     <th>돌봄요청 종료일</th>
-                    <td><input type="datetime-local" name="endDate" class="form-control" id="endDate" th:value="${order.endDate}"></td>
+                    <td><input type="datetime-local" name="endDate" class="form-control" id="endDate" th:value="${#temporals.format(order.endDate, 'yyyy-MM-dd HH:mm')}"></td>
                 </tr>
                 <tr>
                     <th>상세 내용</th>
