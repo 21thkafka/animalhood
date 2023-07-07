@@ -42,15 +42,23 @@
 
 
 ## 주요 기능
-1. 스프링 시큐리티 로그인 기능
+1. 스프링 시큐리티 로그인 기능<br><img width="767" alt="스크린샷 2023-07-07 오후 9 43 13" src="https://github.com/21thkafka/animalhood/assets/82437848/8d35cd7f-8d60-4027-847f-b1a3799f8114">
+
 2. 회원가입 기능
-3. 게시판 형태의 돌봄요청 글을 최대한 REST api 형식으로 CRUD 구현
-4. 회원마다 반려동물 등록, 반려동물 이미지 업로드, 조회 기능
-5. 돌봄요청 글에 돌봄요청 신청을 할 수 있는 기능
-6. 돌봄요청 글 작성자는 돌봄요청 신청한 회원 리스트를 조회할 수 있는 기능
-7. 돌봄요청 신청한 회원의 반려동물 리스트를 조회할 수 있는 기능
+3. 게시판 형태의 돌봄요청 글을 최대한 REST api 형식으로 CRUD 구현<br><img width="751" alt="스크린샷 2023-07-07 오후 9 44 58" src="https://github.com/21thkafka/animalhood/assets/82437848/a6c11da5-7ed3-46f5-9e82-82862436ca7e">
+
+4. 회원마다 반려동물 등록, 반려동물 이미지 업로드, 조회 기능<br>
+<img width="799" alt="스크린샷 2023-07-07 오후 9 47 39" src="https://github.com/21thkafka/animalhood/assets/82437848/71ef7d4d-8249-4c10-8b0b-38c16ca93004">
+
+5. 돌봄요청 글에 돌봄요청 신청을 할 수 있는 기능<br><img width="772" alt="스크린샷 2023-07-07 오후 9 46 00" src="https://github.com/21thkafka/animalhood/assets/82437848/42a28d27-3154-4081-8f40-25c5fa885c14">
+
+6. 돌봄요청 글 작성자는 돌봄요청 신청한 회원 리스트를 조회할 수 있는 기능<br><img width="1022" alt="스크린샷 2023-07-07 오후 9 50 14" src="https://github.com/21thkafka/animalhood/assets/82437848/8ac3b96f-747b-4f61-9612-95ed255e03df">
+
+7. 돌봄요청 신청한 회원의 반려동물 리스트를 조회할 수 있는 기능<br><img width="902" alt="스크린샷 2023-07-07 오후 9 51 21" src="https://github.com/21thkafka/animalhood/assets/82437848/7007b31a-88cd-41b4-85ee-e934b8afb9ef">
+
 8. 돌봄요청 신청한 회원 중 한 명을 선택하여 수락하면 다른 회원은 reject 상태로 변환되는 기능
-9. 회원이 작성한 돌봄요청 글 목록과 돌봄 요청 신청 목록 조회 기능
+9. 회원이 작성한 돌봄요청 글 목록과 돌봄 요청 신청 목록 조회 기능<br><img width="746" alt="스크린샷 2023-07-07 오후 9 52 29" src="https://github.com/21thkafka/animalhood/assets/82437848/7d5ad1b1-1b78-439a-b5e5-bd5fcfdb989b">
+
 
 
 ## 구현 예정 기능
