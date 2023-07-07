@@ -13,7 +13,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>#</th>
+                <th>돌봄요청 동물</th>
                 <th>회원 email</th>
 <!--                <th>돌봄펫 이름</th>-->
 <!--                <th>돌봄펫 나이</th>-->
@@ -25,7 +25,8 @@
             </thead>
             <tbody>
             <tr th:each="item : ${orders}">
-                <td th:text="${item.id}"></td>
+<!--                <td th:text="${item.id}"></td>-->
+                <td><img th:src="@{|/img/${item.member.pet[0].image.serverName}|}" style="width:100px;"></td>
                 <td th:text="${item.member.email}"></td>
 <!--                <td th:text="${item.pat[0].petName}"></td>-->
 <!--                <td th:text="${item.pat[0].petAge}"></td>-->
