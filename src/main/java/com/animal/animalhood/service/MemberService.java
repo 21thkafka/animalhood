@@ -42,8 +42,8 @@ public class MemberService {
     //회원 전체 조회
     public List<Member> findMembers(){ return memberRepository.findAll(); }
 
-//    @Transactional
-//    public Member findOne(Long memberId) { return memberRepository.findOne(memberId);}
+    //회원 조회
+    public Member findOne(Long memberId) { return memberRepository.findOne(memberId);}
     @Transactional
     public Member findOne(String email) {
         List<Member> members = memberRepository.findByEmail(email);
