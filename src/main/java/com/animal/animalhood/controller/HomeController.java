@@ -19,6 +19,12 @@ public class HomeController {
     private final SittingOrderService sittingOrderService;
 
     @GetMapping("/")
+    public String index(){
+        return "redirect:/login";
+    }
+
+    @GetMapping("/home")
+    //@GetMapping("/")
     public String home(Model model){
 
         //test id 유저의 펫 입력
