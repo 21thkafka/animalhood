@@ -18,7 +18,7 @@
         <tbody>
         <tr th:each="sitter :${sitter}">
              <th th:text="${sitter.email}"></th>
-            <th><a th:href="@{/sittingOrder/sitter/pet/{id}(id=${sitter.id})}">펫보기</a></th>
+            <th><a th:href="@{/sitting-order/sitter/pet/{id}(id=${sitter.id})}">펫보기</a></th>
             <th th:text="${sitter.sittingPoint}"></th>
             <th th:text="${sitter.sitterPets[0].status}"></th>
             <th><button type="button" class="btn btn-primary" style="padding: 3px 7px" th:onclick="response('Y',[[${sitter.sitterPets[0].id}]])">수락</button>
@@ -38,7 +38,7 @@
         let url = window.location.href;
         let id = url.charAt(url.length - 1);
 
-        fetch(`/sittingOrder/sitter/${id}/`, {
+        fetch(`/sitting-order/sitter/${id}/`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",

@@ -35,14 +35,14 @@ public class OrderController {
     private final PetService petService;
 
     //목록
-    @GetMapping("/sittingOrders")
+    @GetMapping("/sitting-orders")
     public String sittingOrderList (Model model){
         List<SittingOrder> orders = sittingOrderService.findList();
         model.addAttribute("orders", orders);
         return "sittingOrder/sittingOrderList";
     }
 
-    @GetMapping("/sittingOrder")
+    @GetMapping("/sitting-order")
     public String applyForm ( Model model){
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -54,18 +54,18 @@ public class OrderController {
         return "sittingOrder/sittingOrderForm";
     }
 
-    @PostMapping("/sittingOrder")
+    @PostMapping("/sitting-order")
     public String sittingOrder(@RequestParam("memberId") Long memberId,
                                @RequestParam("detail") String detail,
                                @RequestParam("strDate") String strDate,
                                @RequestParam("endDate") String endDate){
 
         sittingOrderService.order(memberId, strDate, endDate, detail);
-        return "redirect:/sittingOrders";
+        return "redirect:/sitting-orders";
     }
 
     //상세조회
-    @GetMapping("/sittingOrder/detail/{id}")
+    @GetMapping("/sitting-order/detail/{id}")
     public String detailSittingOrder (@PathVariable Long id, Model model){
         SittingOrder order = sittingOrderService.orderDetail(id);
         model.addAttribute("order", order);
@@ -80,7 +80,7 @@ public class OrderController {
         return "sittingOrder/sittingOrderDetail";
     }
 
-    @PutMapping("/sittingOrder/detail/{id}")
+    @PutMapping("/sitting-order/detail/{id}")
     public ResponseEntity<UpdateOrderResponse> updateSittingOrder (@PathVariable Long id,
                                                             @RequestBody updateSittingOrder request,
                                                             Model model){
@@ -93,7 +93,7 @@ public class OrderController {
                 .body(result);
     }
 
-    @DeleteMapping("/sittingOrder/detail/{id}")
+    @DeleteMapping("/sitting-order/detail/{id}")
     public ResponseEntity<Void> deleteSittingOrder(@PathVariable Long id){
         sittingOrderService.deleteOrder(id);
 
@@ -102,7 +102,7 @@ public class OrderController {
     }
 
     //돌봄 요청 신청
-    @PostMapping("/sittingOrder/sitter")
+    @PostMapping("/sitting-order/sitter")
     public ResponseEntity<Void> applySitter(@RequestBody addSitterRequest req){
         Member member = memberService.findOne(req.getEmail());
         SittingOrder order = sittingOrderService.orderDetail(req.getOrderId());
@@ -120,7 +120,7 @@ public class OrderController {
     }
 
     //돌봄 요청 신청자 조회
-    @GetMapping("/sittingOrder/sitters/{id}")
+    @GetMapping("/sitting-order/sitters/{id}")
     public String sittersList(@PathVariable Long id, Model model){
 
         List<Member> sitterPets = sittingOrderService.sitterList(id);
@@ -130,7 +130,7 @@ public class OrderController {
     }
 
     //돌봄 요청 신청자 반려동물 리스트 조회
-    @GetMapping("/sittingOrder/sitter/pet/{id}")
+    @GetMapping("/sitting-order/sitter/pet/{id}")
     public String sitterPetList(@PathVariable Long id, Model model){
         List<Pet> petMember = petService.findPetMember(id);
         model.addAttribute("pet", petMember);
@@ -138,7 +138,7 @@ public class OrderController {
     }
 
     //돌봄 요청 신청자 응답
-    @PutMapping("/sittingOrder/sitter/{id}/")
+    @PutMapping("/sitting-order/sitter/{id}/")
     public ResponseEntity<sitterApplyResponse> sitterResponse(@RequestBody sitterApplyResponse rep, Model model){
         Long id = rep.getId();
         SitterPet sitter = sittingOrderService.findSitter(id);

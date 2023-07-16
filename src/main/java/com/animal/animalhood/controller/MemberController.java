@@ -58,7 +58,7 @@ public class MemberController {
         return "redirect:/login";
     }
 
-    @GetMapping("/myPage")
+    @GetMapping("/mypage")
     public String myPage(Model model){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;

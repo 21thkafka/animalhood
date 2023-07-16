@@ -94,7 +94,7 @@
                 <td th:text="${item.id}"></td>
                 <td th:text="${#temporals.format(item.sitterPets[0].regDate, 'yyyy-MM-dd HH:mm')}"></td>
                 <td th:text="${item.sitterPets[0].status}"></td>
-                <td><a th:href="@{/sittingOrder/detail/{id}(id=${item.id})}">조회</a></td>
+                <td><a th:href="@{/sitting-order/detail/{id}(id=${item.id})}">조회</a></td>
             </tr>
             </tbody>
         </table>
@@ -147,7 +147,7 @@ function popupClose(){
 }
 function sitterPopup(){
     let sittingId = document.getElementById("sittingId").innerText;
-    let url = "/sittingOrder/sitters/" + sittingId;
+    let url = "/sitting-order/sitters/" + sittingId;
     window.open(url, "_blank", "toolbar=yes,top=10,left=500,width=900,height=500");
 }
 </script>

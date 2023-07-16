@@ -8,7 +8,7 @@
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
     <div>
-        <a href = "/sittingOrder">등록하기</a>
+        <a href = "/sitting-order">등록하기</a>
 
         <table class="table table-striped">
             <thead>
@@ -37,7 +37,7 @@
 <!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
 <!--                       th:href="'javascript:cancel('+${item.id}+')'"-->
 <!--                       class="btn btn-danger">CANCEL</a>-->
-                    <a th:href="@{/sittingOrder/detail/{id}(id=${item.id})}">조회</a>
+                    <a th:href="@{/sitting-order/detail/{id}(id=${item.id})}">조회</a>
                 </td>
             </tr>
             </tbody>

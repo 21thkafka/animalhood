@@ -36,7 +36,7 @@ if (updateButton) {
             let url = window.location.href;
                     let id = url.charAt(url.length - 1);
 
-                    fetch(`/sittingOrder/detail/${id}`, {
+                    fetch(`/sitting-order/detail/${id}`, {
                         method: 'PUT',
                         headers: {
                             "Content-Type": "application/json",
@@ -49,7 +49,7 @@ if (updateButton) {
                     })
                         .then(() => {
                             alert('수정이 완료되었습니다.');
-                            location.replace(`/sittingOrder/detail/${id}`);
+                            location.replace(`/sitting-order/detail/${id}`);
                         });
         } else {
             alert("작성자만 수정할 수 있습니다")
@@ -65,12 +65,12 @@ if (deleteButton) {
         deleteButton.addEventListener('click', event => {
             if(memberEmail == userEmail){
                 let id = document.getElementById('orderId').value;
-                fetch(`/sittingOrder/detail/${id}`, {
+                fetch(`/sitting-order/detail/${id}`, {
                     method: 'DELETE'
                 })
                     .then(() => {
                         alert('삭제가 완료되었습니다.');
-                        location.replace('/sittingOrders');
+                        location.replace('/sitting-orders');
                     });
                 } else {
                         alert("작성자만 삭제가 가능합니다");
@@ -85,7 +85,7 @@ if(applySitterButton){
         if(memberEmail != userEmail){
             let url = window.location.href;
             let id = url.charAt(url.length - 1);
-            fetch(`/sittingOrder/sitter`, {
+            fetch(`/sitting-order/sitter`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -97,7 +97,7 @@ if(applySitterButton){
             })
                 .then(() => {
                     alert('돌본 신청 됐습니다');
-                    location.replace('/myPage')
+                    location.replace('/mypage')
                 });
         }
     });

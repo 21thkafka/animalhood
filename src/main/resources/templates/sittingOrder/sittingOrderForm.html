@@ -5,7 +5,7 @@
 
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-    <form role="form" action="/sittingOrder" method="post">
+    <form role="form" action="/sitting-order" method="post">
         <input type="hidden" id="memberId" name="memberId" th:value="${member.id}">
         <div class="form-group">
             <label for="email">회원 email</label>

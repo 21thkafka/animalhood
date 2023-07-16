@@ -38,7 +38,7 @@ public class PetController {
         Long imgNo = petService.saveImg(image);
         System.out.println("imgNo : " + imgNo);
 
-        return "redirect:/myPage";
+        return "redirect:/mypage";
     }
 
  /*   @PostMapping("/image")
