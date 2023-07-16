@@ -33,8 +33,7 @@ public class MemberController {
     @GetMapping("/login")
     public String login(){
 
-     //   return "login";
-        return "oauthLogin";
+        return "login";
     }
 
     @GetMapping("/logout")

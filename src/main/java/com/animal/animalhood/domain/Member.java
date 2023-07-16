@@ -3,7 +3,6 @@ package com.animal.animalhood.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,9 +22,6 @@ public class Member implements UserDetails {
     @Column(name="member_id")
     private Long id;
 
-    // 사용자 이름
-    @Column(name = "nickname", unique = true)
-    private String nickname;
     private String email;
 
     private String password;
@@ -36,7 +32,6 @@ public class Member implements UserDetails {
 
     private String mobile;
 
-    @ColumnDefault("0")
     private int sittingPoint;
 
     private LocalDateTime regDate;
@@ -54,19 +49,6 @@ public class Member implements UserDetails {
         sittingOrder.setMember(null);
     }
 
-    // 사용자 이름 변경
-    public Member update(String nickname){
-        this.nickname = nickname;
-        return this;
-    }
-
-    // 사용자 생성
-    public static Member createMember(String nickname, String email){
-        Member member = new Member();
-        member.setNickname(nickname);
-        member.setEmail(email);
-        return member;
-    }
     @OneToMany(mappedBy = "member")
     private List<Pet> pet = new ArrayList<>();
 

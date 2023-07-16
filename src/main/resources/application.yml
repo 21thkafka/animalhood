@@ -28,16 +28,6 @@ spring:
     hibernate:
       ddl-auto: create
       format_sql: true
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: 191482185001-rrhs18htqikock2r3nbic13cc6pvb2fl.apps.googleusercontent.com
-            client-secret: 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
-            scope:
-              - email
-              - profile
 
 imgLocation: /Users/hyun/Desktop/image/
 
