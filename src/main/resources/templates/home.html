@@ -10,14 +10,8 @@
     <div class="jumbotron">
         <h1>AnimalHood</h1>
 
-        <p class="lead">회원 기능</p>
         <input type="hidden" id="userName" th:value="${member.name}">
-        <p>
-            <a class="btn btn-lg btn-secondary" id="join" href="/signup">회원 가입</a>
-            <a class="btn btn-lg btn-secondary" id="login" href="/login">로그인</a>
-            <a class="btn btn-lg btn-secondary" id="logout" href="/logout">로그아웃</a>
-            <a class="btn btn-lg btn-secondary" id="myPage" href="/mypage">마이페이지</a>
-        </p>
+
         <p class="lead">돌봄요청 글 기능</p>
         <p>
             <a class="btn btn-lg btn-dark" href="/sitting-order">돌봄요청 글 등록</a>
@@ -27,22 +21,6 @@
     </div>
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
-<script>
-    let name = document.getElementById('userName').value;
-    console.log("name " + name);
-    if(name != null){
-        document.getElementById('join').style.display="none";
-        document.getElementById('login').style.display="none";
-        document.getElementById('logout').style.display="inline";
-        document.getElementById('myPage').style.display="inline";
-    } else {
-        document.getElementById('join').style.display="inline";
-        document.getElementById('login').style.display="inline";
-        document.getElementById('logout').style.display="none";
-        document.getElementById('myPage').style.display="none";
-    }
 
-</script>
 </body>
-</html>
 </html>
