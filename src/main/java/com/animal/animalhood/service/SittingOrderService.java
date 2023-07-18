@@ -20,8 +20,21 @@ public class SittingOrderService {
     private final PetRepository patRepository;
     private final SittingOrderRepository sittingOrderRepository;
 
-    public List<SittingOrder> findList() {
-        return sittingOrderRepository.findAll();
+    /**
+     * 페이징된 목록조회
+     * @param page
+     * @return
+     */
+    public List<SittingOrder> findList(int page) {
+        return sittingOrderRepository.findAll(page);
+    }
+
+    /**
+     * 돌봄 요청 toalcount
+     */
+    public int findTotalCnt(){
+        int total = sittingOrderRepository.count();
+        return total;
     }
 
     /**

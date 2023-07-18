@@ -4,6 +4,7 @@ package com.animal.animalhood.controller;
 import com.animal.animalhood.domain.*;
 
 import com.animal.animalhood.dto.addSitterRequest;
+import com.animal.animalhood.dto.pagingDto;
 import com.animal.animalhood.dto.sitterApplyResponse;
 import com.animal.animalhood.dto.updateSittingOrder;
 import com.animal.animalhood.service.MemberDetailService;
@@ -35,10 +36,28 @@ public class OrderController {
     private final PetService petService;
 
     //목록
-    @GetMapping("/sitting-orders")
-    public String sittingOrderList (Model model){
-        List<SittingOrder> orders = sittingOrderService.findList();
+    @GetMapping("/sitting-orders/{page}")
+    public String sittingOrderList (@PathVariable int page, Model model){
+       //1페이지가 아닐경우 첫페이지 10씩 증가
+        if(page != 1){
+            page = (page-1) * 10;
+        } else {
+            //mysql limit 0부터 시작
+            page = page - 1;
+        }
+
+        int endPage = 1;
+        int totalCnt = sittingOrderService.findTotalCnt();
+        if (totalCnt > 10){
+            endPage = (int) Math.ceil(totalCnt/10.0);
+
+        }
+
+        List<SittingOrder> orders = sittingOrderService.findList(page);
+        pagingDto paging = new pagingDto(totalCnt, endPage);
+
         model.addAttribute("orders", orders);
+        model.addAttribute("cnt", paging);
         return "sittingOrder/sittingOrderList";
     }
 

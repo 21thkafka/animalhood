@@ -22,8 +22,10 @@ public class SittingOrderRepository {
         return em.find(SittingOrder.class, id);
     }
 
-    public List<SittingOrder> findAll() {
-        return em.createQuery("select s from SittingOrder s inner join s.member", SittingOrder.class)
+    public List<SittingOrder> findAll(int page) {
+        return em.createQuery("select s from SittingOrder s inner join s.member order by s.regDate desc", SittingOrder.class)
+                .setFirstResult(page)
+                .setMaxResults(10)
                 .getResultList();
     }
 
@@ -53,5 +55,14 @@ public class SittingOrderRepository {
                 .setParameter("status", status)
                 .executeUpdate();
         em.clear(); //벌크 연산 수행 후 영속성 컨텍스트 초기화
+    }
+
+    public int count() {
+        Object result = em.createQuery("select count(*) from SittingOrder s")
+                .getSingleResult();
+
+        int cnt = Integer.parseInt(result.toString());
+
+        return cnt;
     }
 }

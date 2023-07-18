@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header">
-    <title>Hello</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -9,10 +8,13 @@
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
     <div>
         <a href = "/sitting-order">등록하기</a>
-
+        <input type="hidden" id="userName"/>
+        <input type="hidden" id="totalCnt" th:value="${cnt.totalCnt}"/>
+        <input type="hidden" id="endPage" th:value="${cnt.endPage}"/>
         <table class="table table-striped">
             <thead>
             <tr>
+                <th>no</th>
                 <th>돌봄요청 동물</th>
                 <th>회원 email</th>
 <!--                <th>돌봄펫 이름</th>-->
@@ -25,7 +27,7 @@
             </thead>
             <tbody>
             <tr th:each="item : ${orders}">
-<!--                <td th:text="${item.id}"></td>-->
+                <td th:text="${item.id}"></td>
                 <td><img th:src="@{|/img/${item.member.pet[0].image.serverName}|}" style="width:100px;"></td>
                 <td th:text="${item.member.email}"></td>
 <!--                <td th:text="${item.pat[0].petName}"></td>-->
@@ -43,7 +45,13 @@
             </tbody>
         </table>
     </div>
+    <!-- 페이징 -->
+    <div class="list_page" id="pagingDiv">
+<!--        <a href="#" class="on">1</a>-->
+<!--        <a href="#" onclick="onlineList.fn.goPage(2); return false;">2</a>-->
+    </div>
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
+<script src="/js/common-paging.js"></script>
 </body>
 </html>
