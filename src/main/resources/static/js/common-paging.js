@@ -8,7 +8,7 @@ $(document).ready(function(){
     for(i = 1; i <= endPage; i++){
         if(i == pageNo){
 
-            html += "<a href=\"#\" title='현재페이지' class\"on\">"+pageNo+"</a>"
+            html += "<a href=\"#\" title='현재페이지' class=\"on\">"+pageNo+"</a>"
         } else if (i != pageNo){
             html += "<a href=\""+i+"\" >"+i+"</a>"
         }
